@@ -1,0 +1,12 @@
+  .h1readyS{
+    position: absolute;
+    color: rgb(3, 2, 2);
+    font-size: 175px;    
+  }
+
+  .containerReadyS{
+    margin-top: 15%;
+    margin-left: 0%;
+    position: absolute;
+    display: inline-block;
+  }
