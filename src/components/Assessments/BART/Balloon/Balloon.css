@@ -1,0 +1,57 @@
+.btnContainer{
+  display: flex;
+}
+.buttonUp {
+    width: 110px;
+    height: 40px; 
+    border-radius: 20px; 
+    text-decoration: none;
+    color: rgb(241, 241, 246);
+    background-color: #4b82b5;;
+    text-align: center;
+    align-items: center;
+    margin-left: 6%;
+    display:flex;
+    justify-content: center;
+    margin-top: 2%;
+  }
+  .buttonUp:hover{
+    color: #f3f6f9;
+    background-color:  #2665a0;
+  } 
+  .buttonDown{
+    width: 110px;
+    height: 40px; 
+    border-radius: 20px; 
+    text-decoration: none;
+    color: rgb(241, 241, 246);
+    background-color: #316c4db7;
+    text-align: center;
+    align-items: center;
+    margin-left: 36%;
+    display:flex;
+    justify-content: center;
+    margin-top: 2%;
+  }
+  .buttonDown:hover{
+    color: #f3f6f9;
+    background-color: #1e4b33c6;
+  } 
+
+.Score1{
+    margin-right: 10%;
+    text-align: right;
+} 
+.imgContainer{
+display: flex;
+height: 450px;
+width: 310px;
+margin-left: 35%;
+align-items: center;
+justify-content: center;
+}
+
+.Progress{
+  width: 100%;
+  /* padding-bottom: 2%; */
+}

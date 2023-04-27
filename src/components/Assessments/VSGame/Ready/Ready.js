@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from "react-router-dom"
 import "./Ready.css"
-import CardF from "../CardF/CardF"
+import Card from "../Card/Card"
 import React from 'react'
 
 function Ready(){
@@ -13,7 +13,7 @@ function Ready(){
     ]);
  
     return (
-        <div className="App">
+        <div className="Ready">
              <h1> مهمة فرز البطاقات </h1>
             <div className="tips">
              <h5> .ستحصل على مجموعتين من البطاقات ، كل واحدة تحتوي على 64 بطاقة <br/>
@@ -24,7 +24,7 @@ function Ready(){
 </div>
 <div className="container">
         { cards.map((card, index) => (
-           <CardF key={index} item={card} id={index}/>
+           <Card key={index} item={card} id={index}/>
              )) }
              </div>
             <div className="btn"> 

@@ -3,7 +3,7 @@ import React from "react";
 function CardF({item, id}){
     if (item.stat === 'active'){
     return (
-       <div className={"card"} >
+       <div className={"cardF"} >
             <img src={item.img} alt="" />
         </div>
     )}

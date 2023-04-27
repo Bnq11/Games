@@ -1,13 +1,16 @@
 .card{
-    background-color: #ffffff00;
+    background-color: #0e0e0e;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 5px; 
+    border-radius:12px; 
+    width: 152px;
+    height: 203px; 
    }
   
   .card img{
     max-width: 150px;
     max-height: 300px; 
-    border: black , 20px;
+    border-width: 20px;
+    border-color:black;
   } 
