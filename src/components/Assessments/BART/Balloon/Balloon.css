@@ -4,38 +4,41 @@
 .buttonUp {
     width: 110px;
     height: 40px; 
-    border-radius: 20px; 
+    border-radius: 3px; 
     text-decoration: none;
     color: rgb(241, 241, 246);
-    background-color: #4b82b5;;
+    background-color: #1a70bc;
     text-align: center;
     align-items: center;
     margin-left: 6%;
     display:flex;
     justify-content: center;
     margin-top: 2%;
+    border: #2d537690;
   }
   .buttonUp:hover{
     color: #f3f6f9;
-    background-color:  #2665a0;
+    background-color: #4b82b5ad;
   } 
   .buttonDown{
     width: 110px;
     height: 40px; 
-    border-radius: 20px; 
+    border-radius: 3px; 
     text-decoration: none;
     color: rgb(241, 241, 246);
-    background-color: #316c4db7;
+    background-color: #1abc9c;
     text-align: center;
     align-items: center;
-    margin-left: 36%;
+    margin-left: 39.3%;
     display:flex;
     justify-content: center;
     margin-top: 2%;
+    border: #2d537690;
+
   }
   .buttonDown:hover{
     color: #f3f6f9;
-    background-color: #1e4b33c6;
+    background-color:  #1abc9cab;
   } 
 
 .Score1{
@@ -44,14 +47,79 @@
 } 
 .imgContainer{
 display: flex;
-height: 450px;
+height: 400px;
 width: 310px;
-margin-left: 35%;
+margin-left: 39%;
 align-items: center;
 justify-content: center;
 }
 
-.Progress{
+progress {
   width: 100%;
-  /* padding-bottom: 2%; */
+  height: 2rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #e5e5e5;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #e5e5e5;
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+  background-color: #1abc9c;
+  border-radius: 10px;
+}
+.amount {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-right: 50px;
+}
+
+.borrowed {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+}
+
+.cash {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 1rem;
+}
+
+.icon-cash{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+}
+
+.cash-name {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 15px;
+}
+.cash-amount{
+    color: #1abc9c;
+    font-size: 15px;
+}
+.progressbar__label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #3d3b3b;
+  font-size: 20px;
+  font-weight: 700;
+}
+.progressbar {
+  position: relative;
+}
+
+.progressbar__fill {
+  width: 100%;
 }

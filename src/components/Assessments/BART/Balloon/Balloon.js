@@ -5,6 +5,7 @@ import Popup from "../../VSGame/Popup/Popup";
 import React from 'react';
 import { Line } from 'rc-progress';
 import Pop from '../assets/Pop.mp3'
+import Fade from 'react-reveal';
 function Balloons(){
     const [items] = useState([
         { id: 1, img: '/img/blue.png', stat: "" },
@@ -55,6 +56,8 @@ function Balloons(){
     const [Risk, setRisk]=useState(0) 
     const [RiskRatio, setRiskRatio]=useState(0)
     // Risk Taking Ratio will be used in the last step
+    const [LastBalloon, setLastBalloon]=useState(0)
+
 
     function handleClick(){
       if(index === 0){
@@ -75,9 +78,9 @@ function Balloons(){
          }
          setBlueArray([...BlueArray]);
       
-      if (BlueArray[attempts] === 0){
-        setRisk(Risk+1)
-        new Audio(Pop).play()
+        if (BlueArray[attempts] === 0){
+            setRisk(Risk+1)
+            new Audio(Pop).play()
             setoriginal(false);
             setpumpO(true)
             setTimeout(() => {
@@ -107,9 +110,9 @@ function Balloons(){
                 121,123,124,125,126,127,128
             ])
             setCount(1)
-            setRisk(Risk+1)
+            setLastBalloon(0)
       }else{
-        setCount(Count+0.15);
+        setCount(Count+0.15); //===============???????
         console.log(Count*30,Count*50);
         setScore(Score + 0.05);
         setAttempts(attempts+1)
@@ -165,6 +168,7 @@ function Balloons(){
                 1,2,3,4,5,6,7,8
             ])
             setCount(1)
+            setLastBalloon(0)
       }else{
         setCount(Count+0.15);
         console.log(Count*30,Count*50);
@@ -220,6 +224,7 @@ function Balloons(){
                 21,22,23,24,25,26,27,28,29,30,31,32
             ])
             setCount(1)
+            setLastBalloon(0)
       }else{
         setCount(Count+0.15);
         console.log(Count*30,Count*50);
@@ -235,12 +240,13 @@ function Balloons(){
     }
 
 function collect(){
+    setLastBalloon(Score)
     setTotal(Total+Score);
-    setnum(num+1)
-    setAttempts(1)
+    setnum(num+1) 
+    setAttempts(1) 
     setCount(1)
-    setScore(0)
-    setIndex(Math.floor(Math.floor((Math.random()*3))))
+    setScore(0) 
+    setIndex(Math.floor(Math.floor((Math.random()*3)))) //New Balloon
     setYellowArray([
         1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,
         21,22,23,24,25,26,27,28,29,30,31,32
@@ -267,19 +273,62 @@ function collect(){
 
 return (
     <div className=" "> 
-    <div className='Progress'>
+    {/* <div className='Progress'>
         <Line percent={num*6.66} />
-    </div> 
-    <div className="barb">
-        <div className='Score1'><p> المجموع: {Total.toFixed(2)}</p>
-        <p> مجموع الجولة {num} : {Score.toFixed(2)}</p>
+    </div>  */}
+     <div className="progressbar">
+        <div className="progressbar">
+          <div className="progressbar__label">{Math.floor((num*6.66))}%</div>
+        <progress className="progressbar__fill" value={num} max={15} />
+    </div>
+      </div>
+      <Fade right>
+        <div className="amount">
+          <div className="icon-cash">
+          <div className="cash"  style={{ 
+            transition: "background-color 1s ease-in-out" 
+            }}>
+            <h1 className="cash-name">مجموع الربح </h1>
+            <h1 className="cash-name">:</h1>
+            <h1 className="cash-amount">
+              {" "}
+              {Total.toFixed(2)}{" "}
+            </h1>
+            <h1 className="cash-name"> ريال   <br/> </h1>
+            </div>
+          </div>
         </div>
+      </Fade>
+            <Fade right>
+        <div className="amount">
+          <div className="icon-cash">
+          <div className="cash"  style={{ 
+            // backgroundColor: colors[colorIndex], 
+            transition: "background-color 1s ease-in-out" 
+            }}>
+            <h1 className="cash-name"> ربح البالون الأخير </h1>
+            <h1 className="cash-name">:</h1>
+            <h1 className="cash-amount">
+              {" "}
+              {LastBalloon.toFixed(2)}{" "}
+            </h1>
+            <h1 className="cash-name"> ريال </h1>
+            
+           </div>
+          </div>
         </div>
+      </Fade>
+
+  
     <div className="imgContainer">
     { original && <center><img src= {items[index].img} alt="" style={ {display: 'flex', width: +  Count*30 + 'px', height: +  Count*50 + 'px'} } /></center> }
     { pumpO && <center><img src= {Animation[index].img} alt="" style={ {display: 'flex', width: +  Count*30 + 'px', height: +  Count*50 + 'px'} } /></center> }
     { pumpT && <center><img src= {animation[index].img} alt="" style={ {display: 'flex', width: +  Count*30 + 'px', height: +  Count*50 + 'px'} } /></center> }
     </div>
+    <h1 className="cash-amount">
+              {" "}
+              {Score.toFixed(2)}{" "}
+            </h1>
     <div className="btnContainer">
     <button className="buttonDown" onClick={collect}> <h3> جمع </h3></button>
     <button className="buttonUp"  onClick={ handleClick } > <h3>  زيادة الحجم </h3></button>

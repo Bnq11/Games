@@ -4,6 +4,7 @@ import './caard.css'
 import Caard from './Caard'
 import { Line } from 'rc-progress'
 import Popup from '../../VSGame/Popup/Popup'
+import Fade from 'react-reveal';
 
 
 function Caards(){
@@ -86,16 +87,68 @@ function Clicked(){
         if (num === 30)
         {setOpenPopup(true)}
 }
+
+//===========================================
+
+
+
+
     return (
        <div>
-       <div className='progressBar'>
+        <div className="progressbar">
+        <div className="progressbar">
+          <div className="progressbar__label">{Math.floor((num*3.333))}%</div>
+        <progress className="progressbar__fill" value={num} max={15} />
+    </div>
+      </div>
+      <Fade right>
+        <div className="amount">
+          <div className="icon-cash">
+          <div className="cash"  style={{ 
+            transition: "background-color 1s ease-in-out" 
+            }}>
+            <h1 className="cash-name">مجموع الربح </h1>
+            <h1 className="cash-name">:</h1>
+            <h1 className="cash-amount">
+              {" "}
+              {Total.toFixed(2)}{" "}
+            </h1>
+            <h1 className="cash-name"> ريال   <br/> </h1>
+            </div>
+          </div>
+        </div>
+      </Fade>
+      
+            <Fade right>
+        <div className="amount">
+          <div className="icon-cash">
+          <div className="cash"  style={{ 
+            // backgroundColor: colors[colorIndex], 
+            transition: "background-color 1s ease-in-out" 
+            }}>
+            <h1 className="cash-name">مجموع الجولة {num} </h1>
+            <h1 className="cash-name">:</h1>
+            <h1 className="cash-amount">
+              {" "}
+              {Score.toFixed(2)}{" "}
+            </h1>
+            <h1 className="cash-name"> ريال </h1>
+            
+           </div>
+          </div>
+        </div>
+      </Fade>
+      <Fade left >
+      <button className="button" onClick={Clicked}> <h3> جمع </h3></button>
+      </Fade>
+       {/* <div className='progressBar'>
         <Line percent={num*3.333} />
         </div> 
         <div className="bar">
         <button className="button" onClick={Clicked}> <h3> جمع </h3></button>
         <div className='Score'><p> المجموع: {Total}</p>
         <p> مجموع الجولة {num} : {Score}</p></div>
-        </div>
+        </div> */}
         <div className="containerF">
             { items.map((item, index) => (
                 <Caard key={index} item={item} id={index} handleClick={handleClick} />

@@ -1,125 +1,97 @@
-// import { useEffect, useState } from 'react'
-// import React from 'react';
-// import  './Letters.css';
-// import Popup from '../../GameF/Popup/Popup';
+import { useEffect, useState } from 'react'
+import React from 'react';
+import  './Letters.css';
+// import 'bootstrap/dist/css/bootstrap.css';
+import Popup from '../../VSGame/Popup/Popup'
 
-// function Letters(){
 
-//     const [items] = useState([
-//             { id: 1, img: 'A', stat: "" },
-//             { id: 2, img: 'B', stat: "" },
-//             { id: 3, img: 'C', stat: "" },
-//             { id: 4, img: 'D', stat: "" },
-//             { id: 5, img: 'E', stat: "" },
-//             { id: 6, img: 'F', stat: "" },
-//             { id: 7, img: 'G', stat: "" },
-//             { id: 8, img: 'H', stat: "" },
-//             { id: 9, img: 'I', stat: "" },
-//             { id: 10, img: 'J', stat: "" },
-//             { id: 11, img: 'K', stat: "" },
-//             { id: 12, img: 'L', stat: "" },
-//             { id: 13, img: 'M', stat: "" },
-//             { id: 14, img: 'N', stat: "" },
-//             { id: 15, img: 'O', stat: "" },
-//             { id: 16, img: 'P', stat: "" },
-//             { id: 17, img: 'Q', stat: "" },
-//             { id: 18, img: 'R', stat: "" },
-//             { id: 19, img: 'S', stat: "" },
-//             { id: 20, img: 'T', stat: "" },
-//             { id: 21, img: 'U', stat: "" },
-//             { id: 22, img: 'V', stat: "" },
-//             { id: 23, img: 'W', stat: "" },
-//             { id: 24, img: 'X', stat: "" },
-//             { id: 25, img: 'Y', stat: "" },
-//             { id: 26, img: 'Z', stat: "" },
-//         ].sort(() => Math.random() - 0.5))
 
-//   // const  Letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-//   const [Start, setStart] = useState(true);
-//   //  const [display, setdisplay] = useState(false);
-//   // const [Char, setChar] = useState(Letter.charAt(Math.floor(Math.random()*Letter.length)));
-//   //  const [Score, setScore] = useState(0);
-//  const [openPopup, setOpenPopup] = useState(false);
-//   const [num , setnum ] = useState(0)
-  
+function Letters(){
 
-//   useEffect(() => {
-//     window.addEventListener("keydown", onKeyDown);
-//     return() => console.log('CLEANUP')
-//     },);
-//     const onKeyDown = (e) => {
-//       if (e.key === " "){ handleClick();}
-//     };
-//   function handleClick(){
-//     setStart (false);
-// console.log({num});
-  
-// // setdisplay(true)
 
-// //     if (num === 0){
-// //       setdisplay(true)
-// //   setTimeout(()=>{
-// //     setdisplay(false);
-// //     setChar(Letter.charAt(Math.floor(Math.random()*Letter.length)));
-// //     // setnum (num +1)
-// //     console.log(num)
-// //   }, 1000)
-// // }
-// // if ( num <= 20 )
-// // setdisplay(false);
-// // // setTimeout(()=>{
-// //   setdisplay(true);
-// //   setChar(Letter.charAt(Math.floor(Math.random()*Letter.length)));
-// //   setnum (num +1)
-// //   console.log(num)
-// // // }, 2000)
+const [currentLetter, setCurrentLetter] = useState('');
+const [count, setCount] = useState(0);
+const [responseTime, setResponseTime] = useState(0);
+const [correctCount, setCorrectCount] = useState(0);
+const [incorrectCount, setIncorrectCount] = useState(0);
+const [oneAns , setOneAns] = useState(0)
+const [Xcount , setXcount] = useState(0)
+const [openPopup, setOpenPopup] = useState(false);
+// const [timeSec, setTimeSec] = useState(1000)
 
-// // if (Char === 'X'){
-// //   setnum (num +1);
-// //   handleClick();
-// // }else{
-// //     setScore(Score+1);
-// //     console.log(Score);
-// //   }
 
-// console.log('spacebar')
+
+useEffect(() => {
+    const interval = setInterval(() => {
+    // const isTarget = Math.random() < 0.25 ||Math.random() > 0.25 ; // 25% chance that letter is a target
+    const letter = String.fromCharCode(Math.floor(Math.random() * 26) + 65); // generate a random letter from A to Z
+    setCurrentLetter(letter);
+    // setTarget(isTarget);
+    if (currentLetter === 'X'){
+        setXcount( Xcount +1 );
+        setCount(count +1);
+    }else {
+        setCount(count +1);
+    }
+    console.log(letter , count);
+    setResponseTime(0);
+    setOneAns(1);
+    if(count === 360){
+        setOpenPopup(true)
+    }
+  }, 2000); // show each letter for 2 seconds
+  return () => clearInterval(interval);
+}, []);
+
+const handleResponse = (Letter) => {
+  const responseDelay = Date.now() - responseTime;
+  if (  ( Letter !== 'X') && oneAns === 1) {
+    setCorrectCount(correctCount + 1);
+    console.log('Correct! Response time:', responseDelay);
+  } else {
+    if (  Letter === 'X' && oneAns === 1) {
+    setIncorrectCount(incorrectCount + 1);
+    console.log('Incorrect. Response time:', responseDelay);
+    }
+  }
+  setOneAns(0);
+}
+
+// const handleKeyPress = (event) => {
+//   if (event.key === 'j') {
+//     handleResponse(target);
+//   } else if (event.key === 'f') {
+//     handleResponse(!target);
+//   }
 // }
-// function XXX({item, id}){
-//   if (item.stat === 'active'){
-//   return (
-//      <div className={"card"} >
-//           <h1 className='h1readyS'>{item.img}</h1>
-//       </div>
-//   )}
-//   return(
-//       <div></div>
-//   )}
-//  function next(){ if ( num < 360 ){
-//     items[num].stat="";
-//     items[num+1].stat = "active";
-//     setnum(num+1);
-//     // console.log(items);
-// } else {if (num === 360 ){
-// setOpenPopup(true);
-// }}}
-// return(
 
-//   <div className="">
-//     { Start && <center><h2> اضغط مسافة للبدء </h2></center>}
-//      {/* { display && <h1 className='h1readyS'>{Char}</h1> }   */}
-//    {  items.map((item, index) => (
-//                  <XXX key={index} item={item} id={index} />
-//              )) }
+// const handleButtonClick = (isTarget) => {
+//   handleResponse(Letter);
+// }
 
-//           <Popup
-//                 title={"أنتهى التقييم" }
-//                 // children = {"النقاط : "+ Score}
-//                 openPopup={openPopup}
-//                 setOpenPopup={setOpenPopup}
-//             >      
-//             </Popup>
-//   </div>
-// )
-
-
-// }export default Letters
+return (
+  <div className="container5">
+    <div className="row mt-5">
+      <div className="col-12 text-center">
+        <h1 className='letter'>{currentLetter}</h1>
+        <button className="btn1 btn-primary mr-2" onClick={() =>  handleResponse(currentLetter)}>هدف</button>
+      </div>
+    </div>
+    <div className="row mt-5">
+      <div className="col-12 text-center">
+        <h3>Results</h3>
+        <p>Correct: {correctCount}</p>
+        <p>Incorrect: {incorrectCount}</p>
+      </div>
+    </div>
+    <Popup
+                title={"انتهى التقييم" }
+                // children = {"النقاط : "+ Score}
+                openPopup={openPopup}
+                setOpenPopup={setOpenPopup}
+            >      
+            </Popup>
+  </div>
+);
+}
+export default Letters

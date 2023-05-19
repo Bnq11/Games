@@ -64,13 +64,33 @@
     margin-bottom: 1%;
 
   }
+  .button{
+    width: 110px;
+    height: 30px; 
+    border-radius: 3px; 
+    text-decoration: none;
+    color: rgb(241, 241, 246);
+    background-color: #1abc9c;
+    text-align: center;
+    align-items: center;
+    margin-left: 45%;
+    display:flex;
+    justify-content: center;
+    margin-top: 2%;
+    border: #2d537690;
+
+  }
+  .button:hover{
+    color: #f3f6f9;
+    background-color:  #1abc9cab;
+  } 
   .bar{
     display:flex;
   }
-  .progressBar{
+  /* .progressBar{
     width: 100%;
     padding-bottom: 2%;
-     }
+     } */
 .Score{
     margin-left: 41%;
     text-align: right;

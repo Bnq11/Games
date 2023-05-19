@@ -161,7 +161,7 @@ function Cards(props){
     const [Score , setScore] = useState(0);
     const [WCST64 , setWCST64] = useState(0);
     const [startTimer , setStartTimer] = useState(props);
-    const[Time , setTime]= useState(0);
+    const [Time , setTime]= useState(0);
     const [ConsumedTime , setConsumedTime]= useState(0);
     
    
@@ -172,14 +172,14 @@ function Cards(props){
           }, 1000);
          return () => clearInterval(timerId)
         }
-      }, [ startTimer ])
+      }, [ startTimer ] )
 
 function handleClick(id){
 setisStarted (false);
   if(num < 128 ) { 
    
     if( Count%10 === 0 ){
-        setCategory(  Math.floor(Math.floor((Math.random()*3)+1)));
+        setCategory( Math.floor((Math.random()*3)+1));
       }
       setCount( Count + 1); 
       console.log(Category , Count , num);
@@ -187,88 +187,40 @@ setisStarted (false);
 
 if (Category === 1){ // 1: Number / (1-16)==1 / (17-32)==2 / (33-48)==3 / (49-64)==4
 //First
-    if (Count ===1){
+if (Count ===1){
     if(cards[id].id === 1 ){
-        setTimeout(()=>{
-                 setOpenPopupT(false);
-                },400);
-                setOpenPopupT(true);
-                setScore(Score + 1);
+  Correct();
     }else {
-        setTimeout(()=>{
-                setOpenPopupF(false);
-               },400);
-               setOpenPopupF(true);
+        Wrong();
     }
 }
-
-// All ------------------------------------------------------
+    // All ------------------------------------------------------
 if(cards[id].id === 1 && items[num].id <=16 ){
-    setTimeout(()=>{
-             setOpenPopupT(false);
-            },400);
-            setOpenPopupT(true);
-            setScore(Score + 1);
-            if ( num < 63 ){
-                setWCST64(WCST64+1)
-            }
+Correct();
 }else {
 if(cards[id].id === 2 && items[num].id > 16 && items[num].id <= 32 ){
-    setTimeout(()=>{
-             setOpenPopupT(false);
-            },400);
-            setOpenPopupT(true);
-            setScore(Score + 1);
-            if ( num < 63 ){
-                setWCST64(WCST64+1)
-            }
+Correct();
 }else {
     if(cards[id].id === 3 && items[num].id > 32 && items[num].id <= 48 ){
-        setTimeout(()=>{
-                 setOpenPopupT(false);
-                },400);
-                setOpenPopupT(true);
-                setScore(Score + 1);
+  Correct();
                 if ( num < 63 ){
                     setWCST64(WCST64+1)
                 }
     }  else{  if(cards[id].id === 4 && items[num].id > 48 && items[num].id <= 64 ){
-        setTimeout(()=>{
-                 setOpenPopupT(false);
-                },400);
-                setOpenPopupT(true);
-                setScore(Score + 1);
-                if ( num < 63 ){
-                    setWCST64(WCST64+1)
-                }
+  Correct();
     } else{
-        setTimeout(()=>{
-            setOpenPopupF(false);
-           },400);
-           setOpenPopupF(true);
+        Wrong();
     }
-
     }
 }}
-   
 }else{
     if (Category === 2){ // 2: Color // red == 1 // green ==2 // yallow == 3 // blue == 4
    //First
         if (Count ===1){
             if(cards[id].id === 4 ){
-                setTimeout(()=>{
-                         setOpenPopupT(false);
-                        },400);
-                        setOpenPopupT(true);
-                        setScore(Score + 1);
-                        if ( num < 63 ){
-                            setWCST64(WCST64+1)
-                        }
+             Correct();
             }else {
-                setTimeout(()=>{
-                        setOpenPopupF(false);
-                       },400);
-                       setOpenPopupF(true);
+                Wrong();
             }
         }
 
@@ -277,53 +229,22 @@ if(cards[id].id === 2 && items[num].id > 16 && items[num].id <= 32 ){
 if(cards[id].id === 1 && ( ( items[num].id >= 9 && items[num].id <= 12) ||
  ( items[num].id >= 25 && items[num].id <= 28)|| ( items[num].id >= 41 && items[num].id <= 44)||
   ( items[num].id >= 57 && items[num].id <= 60)) ){
-    setTimeout(()=>{
-             setOpenPopupT(false);
-            },400);
-            setOpenPopupT(true);
-            setScore(Score + 1);
-            if ( num < 63 ){
-                setWCST64(WCST64+1)
-            }
+Correct();
 }else {
 if(cards[id].id === 2 &&  ( ( items[num].id >= 5 && items[num].id <= 8) ||
  ( items[num].id >= 21 && items[num].id <= 24)|| ( items[num].id >= 37 && items[num].id <= 40)||
   ( items[num].id >= 53 && items[num].id <= 56)) ){
-    setTimeout(()=>{
-             setOpenPopupT(false);
-            },400);
-            setOpenPopupT(true);
-            setScore(Score + 1);
-            if ( num < 63 ){
-                setWCST64(WCST64+1)
-            }
+Correct();
 }else {
     if(cards[id].id === 3 &&  ( ( items[num].id >= 13 && items[num].id <= 16) || 
     ( items[num].id >= 29 && items[num].id <= 32)|| ( items[num].id >= 45 && items[num].id <= 48)||
      ( items[num].id >= 61 && items[num].id <= 64)) ){
-        setTimeout(()=>{
-                 setOpenPopupT(false);
-                },400);
-                setOpenPopupT(true);
-                setScore(Score + 1);
-                if ( num < 63 ){
-                    setWCST64(WCST64+1)
-                }
+  Correct();
     }  else{  if(cards[id].id === 4 && ( items[num].id <= 4 || ( items[num].id >= 17 && items[num].id <= 20)||
          ( items[num].id >= 33 && items[num].id <= 36)|| ( items[num].id >= 49 && items[num].id <= 52)) ){
-        setTimeout(()=>{
-                 setOpenPopupT(false);
-                },400);
-                setOpenPopupT(true);
-                setScore(Score + 1);
-                if ( num < 63 ){
-                    setWCST64(WCST64+1)
-                }
+  Correct();
     } else{
-        setTimeout(()=>{
-            setOpenPopupF(false);
-           },400);
-           setOpenPopupF(true);
+        Wrong();
     }
 
     }
@@ -335,19 +256,9 @@ else {
     //First
     if (Count ===1){
         if(cards[id].id === 3 ){
-            setTimeout(()=>{
-                     setOpenPopupT(false);
-                    },400);
-                    setOpenPopupT(true);
-                    setScore(Score + 1);
-                    if ( num < 63 ){
-                        setWCST64(WCST64+1)
-                    }
+         Correct();
         }else {
-            setTimeout(()=>{
-                    setOpenPopupF(false);
-                   },400);
-                   setOpenPopupF(true);
+            Wrong();
         }
     } 
     // All ------------------------------------------------------
@@ -358,14 +269,7 @@ if(cards[id].id === 1 && ( ( items[num].id === 4 || items[num].id === 8 ||
      items[num].id === 36|| items[num].id === 40|| items[num].id === 44|| 
      items[num].id === 48|| items[num].id === 52|| items[num].id === 56|| 
      items[num].id === 60|| items[num].id === 64 ) )){
-    setTimeout(()=>{
-             setOpenPopupT(false);
-            },400);
-            setOpenPopupT(true);
-            setScore(Score + 1);
-            if ( num < 63 ){
-                setWCST64(WCST64+1)
-            }
+Correct();
 }else {
 if(cards[id].id === 2 &&  ( ( items[num].id === 3 || items[num].id === 7 || 
     items[num].id === 11|| items[num].id === 15|| items[num].id === 19||
@@ -373,14 +277,7 @@ if(cards[id].id === 2 &&  ( ( items[num].id === 3 || items[num].id === 7 ||
      items[num].id === 35|| items[num].id === 39|| items[num].id === 43|| 
      items[num].id === 47|| items[num].id === 51|| items[num].id === 55|| 
      items[num].id === 59|| items[num].id === 63 ) ) ){
-    setTimeout(()=>{
-             setOpenPopupT(false);
-            },400);
-            setOpenPopupT(true);
-            setScore(Score + 1);
-            if ( num < 63 ){
-                setWCST64(WCST64+1)
-            }
+Correct();
 }else {
     if(cards[id].id === 3 &&  (  ( items[num].id === 1 || items[num].id === 5 || 
         items[num].id === 9|| items[num].id === 13|| items[num].id === 17||
@@ -388,33 +285,17 @@ if(cards[id].id === 2 &&  ( ( items[num].id === 3 || items[num].id === 7 ||
          items[num].id === 33|| items[num].id === 37|| items[num].id === 41|| 
          items[num].id === 45|| items[num].id === 49|| items[num].id === 53|| 
          items[num].id === 57|| items[num].id === 61) ) ){
-        setTimeout(()=>{
-                 setOpenPopupT(false);
-                },400);
-                setOpenPopupT(true);
-                setScore(Score + 1);
-                if ( num < 63 ){
-                    setWCST64(WCST64+1)
-                }
+  Correct();
+               
     }  else{  if(cards[id].id === 4 && ( ( items[num].id === 2 || items[num].id === 6 || 
         items[num].id === 10|| items[num].id === 14|| items[num].id === 18||
          items[num].id === 22|| items[num].id === 26|| items[num].id === 30|| 
          items[num].id === 34|| items[num].id === 38|| items[num].id === 42|| 
          items[num].id === 46|| items[num].id === 50|| items[num].id === 54|| 
          items[num].id === 58|| items[num].id === 62 ) ) ){
-        setTimeout(()=>{
-                 setOpenPopupT(false);
-                },400);
-                setOpenPopupT(true);
-                setScore(Score + 1);
-                if ( num < 63 ){
-                    setWCST64(WCST64+1)
-                }
+  Correct();
     } else{
-        setTimeout(()=>{
-            setOpenPopupF(false);
-           },400);
-           setOpenPopupF(true);
+        Wrong();
     }
 
     }
@@ -430,26 +311,56 @@ if ( num < 127 ){
         setnum(num+1);
         console.log(items);
    } else {if (num === 127 ){
-    setConsumedTime(Time);
+    CalculateScore();
     setOpenPopup(true);
     setStartTimer(false);
    }}
 }else {
     setOpenPopup(true);
-   }
-
-     
+   }     
+}
+function CalculateScore (){
+    if ( Score > 0 ) {
+        // Correct cards 
+       setScore((Score/128) * 100 );
+        // Time taken to perform the test.
+        var hour = Math.floor(Time / 60 * 60);
+        var min = Math.floor(Time / 60) ;
+        var sec = Time % 60 ;
+        setConsumedTime (hour + ':' + min + ':' + sec ); 
     }
+}
+
+function Correct(){
+    setTimeout(()=>{
+        setOpenPopupT(false);
+       },400);
+       setOpenPopupT(true);
+       setScore(Score + 1);
+       if ( num < 63 ){
+           setWCST64(WCST64+1)
+       }
+}
+function Wrong(){
+    setTimeout(()=>{
+        setOpenPopupF(false);
+       },400);
+       setOpenPopupF(true);
+}
+
     return (
         
        <div>
        <div className="containers">
-       <div className='ProgressBar'>
+       {/* <div className='ProgressBar'>
          <Line percent={num*0.78} />
-         </div> 
-         {/* <div className="bar">
-        <div className='Score'><p> الوقت : {Time} ثوانٍ  </p></div>
-        </div> */}
+         </div>  */}
+          <div className="progressbar">
+        <div className="progressbar">
+        <div className="progressbar__label">{Math.floor((num*0.78))}%</div>
+        <progress className="progressbar__fill" value={num} max={128} />
+    </div>
+      </div>
        {isStarted && starts.map((start, index) => (
                  <CardF key={index} item={start} id={index} />))}
 
