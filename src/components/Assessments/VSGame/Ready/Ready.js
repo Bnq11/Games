@@ -1,8 +1,11 @@
-import { useState } from 'react'
-import { Link } from "react-router-dom"
-import "./Ready.css"
-import Card from "../Card/Card"
-import React from 'react'
+import './Ready.css';
+
+import React, { useState } from 'react';
+
+import { Link } from 'react-router-dom';
+
+import Background from '../../../Background/Background';
+import Card from '../Card/Card';
 
 function Ready(){
     const [cards] = useState([
@@ -13,24 +16,31 @@ function Ready(){
     ]);
  
     return (
+        
         <div className="Ready">
-             <h1> مهمة فرز البطاقات </h1>
+            <h1 className='title'> مهمة فرز البطاقات </h1>
             <div className="tips">
-             <h5> .ستحصل على مجموعتين من البطاقات ، كل واحدة تحتوي على 64 بطاقة <br/>
-              .سيتم عرض بطاقة واحدة في كل مرة وسيُطلب منك فرزها، يمكنك فرز البطاقة من خلال النقر فوق إحدى البطاقات الأربع التي تراها أدناه <br/>
-             .بحسب اللون،او الشكل، او العدد. عندما تفرز البطاقة بشكل صحيح ، ستظهر كلمة "صحيح" على الشاشة <br/>
-             ."ولكن إذا تم فرز البطاقة بشكل خاطئ، فستظهر كلمة "خطأ <br/>
-            .الهدف هو الحصول على أكبر عدد ممكن من البطاقات الصحيحة </h5>
-</div>
-<div className="container">
-        { cards.map((card, index) => (
-           <Card key={index} item={card} id={index}/>
-             )) }
-             </div>
-            <div className="btn"> 
-                <Link to="/Cards" className="btn"> <h3> ابدأ </h3></Link>
+                <h5 className='tips-header shadow'> 
+                    .ستحصل على مجموعتين من البطاقات ، كل واحدة تحتوي على 64 بطاقة <br/>
+                    .سيتم عرض بطاقة واحدة في كل مرة وسيُطلب منك فرزها، يمكنك فرز البطاقة من خلال النقر فوق إحدى البطاقات الأربع التي تراها أدناه <br/>
+                    .بحسب اللون،او الشكل، او العدد. عندما تفرز البطاقة بشكل صحيح ، ستظهر كلمة "صحيح" على الشاشة <br/>
+                    ."ولكن إذا تم فرز البطاقة بشكل خاطئ، فستظهر كلمة "خطأ <br/>
+                    .الهدف هو الحصول على أكبر عدد ممكن من البطاقات الصحيحة 
+                </h5>
             </div>
+            <div className="container">
+                { cards.map((card, index) => (
+                    <Card key={index} item={card} id={index}/>
+                    ))
+                }
+             </div>
+
+             <div className='button-justifyer'>
+            <Link to="/Cards" className="btn">ابدأ</Link>
+            </div>
+            <Background/> 
         </div>
+
     )
 
 }export default Ready

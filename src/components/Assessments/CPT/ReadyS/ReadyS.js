@@ -1,19 +1,29 @@
+import './ReadyS.css';
+
 import React from 'react';
-import  './ReadyS.css';
+
 import { Link } from 'react-router-dom';
+
+import Background from '../../../Background/Background';
 
 function ReadyS(){
     return (
     <div className="Ready">
-    <h1> مهمة </h1>
-   <div className="tips">
-    <h5> </h5>
-</div>
+        <h1 className='title'> مهمة الاداء المستمر  </h1>
+        <div className="tips">
+        <h3 className='tips-header'> 
+            سيتم عرض مجموعة من الاحرف الرجاء الضغط على الزر المسمى بـ"هدف" اذا كان 
+            <br/><br/>
+             . ماعدا ذلك هدف "X" الحرف المعروض ليس
 
-   <div className="btn"> 
-       <Link to="/Letters" className="btn"> <h3> ابدأ </h3></Link>
-   </div>
-</div>
+        </h3>
+        </div>
+
+        <div className="button-justifyer"> 
+            <Link to="/Letters" className="btnt">ابدأ</Link>
+        </div>
+        <Background/>
+    </div>
 )
 
 

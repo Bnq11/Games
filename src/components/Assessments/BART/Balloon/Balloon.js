@@ -1,11 +1,17 @@
 // import { Link } from "react-router-dom"
-import './Balloon.css'
-import { useState } from 'react'
-import Popup from "../../VSGame/Popup/Popup";
-import React from 'react';
-import { Line } from 'rc-progress';
-import Pop from '../assets/Pop.mp3'
-import Fade from 'react-reveal';
+import './Balloon.css';
+import 'react-toastify/dist/ReactToastify.css';
+
+import React, { useState } from 'react';
+
+import {
+  toast,
+  ToastContainer,
+} from 'react-toastify';
+
+import Popup from '../../VSGame/Popup/Popup';
+import Pop from '../assets/Pop.mp3';
+
 function Balloons(){
     const [items] = useState([
         { id: 1, img: '/img/blue.png', stat: "" },
@@ -39,8 +45,6 @@ function Balloons(){
         1,2,3,4,5,6,7,8
     ])
 
-
-
     const [openPopup, setOpenPopup] = useState(false);
     const [index , setIndex ] = useState(Math.floor(Math.floor((Math.random()*3))));
     const [Count , setCount] =  useState(1);
@@ -55,9 +59,11 @@ function Balloons(){
     const [attempts, setAttempts] = useState (0);
     const [Risk, setRisk]=useState(0) 
     const [RiskRatio, setRiskRatio]=useState(0)
+    const [loss, setLoss]=useState(0)
     // Risk Taking Ratio will be used in the last step
     const [LastBalloon, setLastBalloon]=useState(0)
 
+    const notify = () => toast(`مبروك لقد ربحت  ${Score}`);
 
     function handleClick(){
       if(index === 0){
@@ -98,6 +104,7 @@ function Balloons(){
             setRiskRatio( (Risk / 15)*100 );
             setOpenPopup(true)
             }
+            setLoss(loss + Score);
             setScore(0);
             setAttempts(1)
             setBlueArray([
@@ -162,6 +169,7 @@ function Balloons(){
             setRiskRatio( (Risk / 15)*100 );
             setOpenPopup(true)
             }
+            setLoss(loss + Score);
             setScore(0);
             setAttempts(1)
             setOrangeArray([
@@ -217,6 +225,7 @@ function Balloons(){
             setRiskRatio( (Risk / 15)*100 );
             setOpenPopup(true)
             }
+            setLoss(loss + Score);
             setScore(0);
             setAttempts(1);
             setYellowArray([
@@ -242,9 +251,13 @@ function Balloons(){
 function collect(){
     setLastBalloon(Score)
     setTotal(Total+Score);
+    console.log(Score)
     setnum(num+1) 
     setAttempts(1) 
     setCount(1)
+    //
+    notify()
+    //
     setScore(0) 
     setIndex(Math.floor(Math.floor((Math.random()*3)))) //New Balloon
     setYellowArray([
@@ -264,25 +277,27 @@ function collect(){
         121,123,124,125,126,127,128
     ])
     if (num === 15)
-            {
-            setRiskRatio( (Risk / 15)*100 );
-            setOpenPopup(true)
-            }
+    { 
+      CalculateScore ()
+      setOpenPopup(true)
+     }
 }
 
-
+function CalculateScore (){
+  setRiskRatio( (Risk / 15)*100 );
+  var gain = Total;
+  var Loss = loss 
+}
 return (
     <div className=" "> 
-    {/* <div className='Progress'>
-        <Line percent={num*6.66} />
-    </div>  */}
      <div className="progressbar">
         <div className="progressbar">
           <div className="progressbar__label">{Math.floor((num*6.66))}%</div>
         <progress className="progressbar__fill" value={num} max={15} />
     </div>
       </div>
-      <Fade right>
+      <div className='cash-container shadow '>
+
         <div className="amount">
           <div className="icon-cash">
           <div className="cash"  style={{ 
@@ -298,8 +313,8 @@ return (
             </div>
           </div>
         </div>
-      </Fade>
-            <Fade right>
+
+
         <div className="amount">
           <div className="icon-cash">
           <div className="cash"  style={{ 
@@ -317,25 +332,32 @@ return (
            </div>
           </div>
         </div>
-      </Fade>
 
-  
+      </div>
+
+    <ToastContainer position="bottom-left"
+      autoClose={2000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      />        
     <div className="imgContainer">
-    { original && <center><img src= {items[index].img} alt="" style={ {display: 'flex', width: +  Count*30 + 'px', height: +  Count*50 + 'px'} } /></center> }
-    { pumpO && <center><img src= {Animation[index].img} alt="" style={ {display: 'flex', width: +  Count*30 + 'px', height: +  Count*50 + 'px'} } /></center> }
-    { pumpT && <center><img src= {animation[index].img} alt="" style={ {display: 'flex', width: +  Count*30 + 'px', height: +  Count*50 + 'px'} } /></center> }
+      { original && <center><img src= {items[index].img} alt="" style={ {display: 'flex', width: +  Count*30 + 'px', height: +  Count*50 + 'px'} } /></center> }
+      { pumpO && <center><img src= {Animation[index].img} alt="" style={ {display: 'flex', width: +  Count*30 + 'px', height: +  Count*50 + 'px'} } /></center> }
+      { pumpT && <center><img src= {animation[index].img} alt="" style={ {display: 'flex', width: +  Count*30 + 'px', height: +  Count*50 + 'px'} } /></center> }
     </div>
     <h1 className="cash-amount">
               {" "}
               {Score.toFixed(2)}{" "}
             </h1>
     <div className="btnContainer">
-    <button className="buttonDown" onClick={collect}> <h3> جمع </h3></button>
-    <button className="buttonUp"  onClick={ handleClick } > <h3>  زيادة الحجم </h3></button>
+      <button className="tbutton tbuttonColorCyan" onClick={collect}> جمع </button>
+      <button className="tbutton tbuttonColorBlue"  onClick={ handleClick } > زيادة الحجم </button>
     </div>
              <Popup
                 title={"انتهى التقييم" }
-                children= {'Risk Taking Ratio: %'+RiskRatio.toFixed(2)}
+                // children= {'Risk Taking Ratio: %'+RiskRatio.toFixed(2)}
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
             >      

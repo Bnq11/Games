@@ -1,11 +1,13 @@
-import { useEffect , useState } from 'react'
-import Card from '../Card/Card'
-import Popup from "../Popup/Popup";
 import './Cards.css';
-import  CardF from '../CardF/CardF'
-import React from 'react';
-import { Line } from 'rc-progress';
 
+import React, {
+  useEffect,
+  useState,
+} from 'react';
+
+import Card from '../Card/Card';
+import CardF from '../CardF/CardF';
+import Popup from '../Popup/Popup';
 
 function Cards(props){
     const [items] = useState([
@@ -309,32 +311,43 @@ if ( num < 127 ){
         items[num].stat="";
         items[num+1].stat = "active";
         setnum(num+1);
-        console.log(items);
+        if (num === 63 ){
+            CalculateScore();}
    } else {if (num === 127 ){
     CalculateScore();
     setOpenPopup(true);
     setStartTimer(false);
    }}
 }else {
-    setOpenPopup(true);
+    setOpenPopup(true); // final score
    }     
 }
 function CalculateScore (){
-    if ( Score > 0 ) {
-        // Correct cards 
-       setScore((Score/128) * 100 );
-        // Time taken to perform the test.
-        var hour = Math.floor(Time / 60 * 60);
-        var min = Math.floor(Time / 60) ;
-        var sec = Time % 60 ;
-        setConsumedTime (hour + ':' + min + ':' + sec ); 
-    }
+    
+        if ( num === 63 ){
+        // Correct cards %
+         setWCST64((WCST64/64) * 100);
+         // Time taken to perform the test.
+         var hour = Math.floor((Time / 60 )/ 60);
+         var min = Math.floor((Time / 60)- (hour*60)) ;
+         var sec = Math.floor(Time - (min*60)) ;
+         setConsumedTime (hour + ':' + min + ':' + sec );
+        }else{
+         // Correct cards %
+        setScore(Math.floor((Score/128) * 100 ));
+         // Time taken to perform the test.
+         var hour = Math.floor((Time / 60 )/ 60);
+         var min = Math.floor((Time / 60)- (hour*60)) ;
+         var sec = Math.floor(Time - (min*60)) ;
+         setConsumedTime (hour + ':' + min + ':' + sec );
+      }
+    
 }
 
 function Correct(){
     setTimeout(()=>{
         setOpenPopupT(false);
-       },400);
+       },2000);
        setOpenPopupT(true);
        setScore(Score + 1);
        if ( num < 63 ){
@@ -344,7 +357,7 @@ function Correct(){
 function Wrong(){
     setTimeout(()=>{
         setOpenPopupF(false);
-       },400);
+       },2000);
        setOpenPopupF(true);
 }
 
@@ -352,9 +365,7 @@ function Wrong(){
         
        <div>
        <div className="containers">
-       {/* <div className='ProgressBar'>
-         <Line percent={num*0.78} />
-         </div>  */}
+     
           <div className="progressbar">
         <div className="progressbar">
         <div className="progressbar__label">{Math.floor((num*0.78))}%</div>
@@ -389,7 +400,7 @@ function Wrong(){
             </Popup>
             <Popup
                 title={"انتهى التقييم" }
-                children = {"النقاط : "+ Score +' الوقت :' + ConsumedTime }
+                // children = {"النقاط : "+ Score  + ' الوقت: ' + ConsumedTime }
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
             >      

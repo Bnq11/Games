@@ -25,10 +25,30 @@
     margin-bottom: 5%;
   } 
   
-/*   
- .ProgressBar{
-width: 100%;
-padding-bottom: 5%;
+.progressbar__fill::-webkit-progress-value {
+  background-color: #1abc9c;
+  transition: width 2s ease-in-out;
+}
 
- } */
- 
+.progressbar__fill::-moz-progress-bar {
+  background-color: rgb(200, 200, 219, 0.75);
+  transition: width 2s ease-in-out;
+}
+
+.progressbar {
+  position: relative;
+}
+
+.progressbar__fill {
+  width: 100%;
+}
+
+.progressbar__label {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  color: #3d3b3b;
+  font-size: 20px;
+  font-weight: 700;
+}

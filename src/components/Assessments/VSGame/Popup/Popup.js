@@ -1,24 +1,29 @@
-
-import { Dialog, DialogTitle,DialogContent, makeStyles, Typography } from '@material-ui/core';
-import { green } from '@mui/material/colors';
-import { Link } from 'react-router-dom';
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
+import { green } from '@mui/material/colors';
 
 const useStyles = makeStyles(theme => ({
   dialogWrapper: {
     backgroundColor:'whait',
-      paddingLeft:  theme.spacing(80),
-      paddingRight:  theme.spacing(100),
-      paddingTop:  theme.spacing(50),
-      paddingBottom:  theme.spacing(50),
-      position: 'absolute',
+    width:"300px",
+    height:"auto",
+    position: 'absolute',
     
   },
   dialogTitle: {
 
       textDecorationColor :'green'
   }
+
 }))
 
 export default function Popup(props) {
@@ -27,39 +32,39 @@ export default function Popup(props) {
   const classes = useStyles();
 if (title === "انتهى التقييم" ){
   return (
-      <Dialog style={{backgroundColor:'whait',}} open={openPopup} maxWidth="md" classes={{ paper: classes.dialogWrapper }}>
+      <Dialog style={{textAlign:"center",margin:"auto" }} open={openPopup} maxWidth="md" classes={{ paper: classes.dialogWrapper }}>
           <DialogTitle className={classes.dialogTitle}>
-              <div style={{ display: 'flex', backgroundColor:'white' ,width:'190px',marginLeft:'30%'}}>
+              <div style={{ display: 'flex', backgroundColor:'white' }}>
                   <Typography variant="h4" component="div" style={{ flexGrow: 1, textDecorationColor:green }}>
                       {title}
                   </Typography>
               </div>
           </DialogTitle>
-          <DialogContent dividers>
+          <DialogContent style={{margin:"20px"}}>
               {children}    
           </DialogContent>
         <Link to = "/" style={{
-    width: '110px',
-    height: '40px', 
+    width: '30%',
     borderRadius: '20px', 
     textDecoration: 'none',
     color: 'rgb(241, 241, 246)',
     backgroundColor: '#657789',
+    marginRight:'auto',
+    marginLeft:'auto',       
     alignItems: 'center',
-    marginLeft: '40%',
-    marginTop:'50px',
-     display:'flex',
-     justifyContent: 'center',
+    display:'flex',
+    justifyContent: 'center',
+    marginBottom:'10px'
   }}>
-         <center>   <h3> إغلاق </h3></center>
+         <center>   <h4> إغلاق </h4></center>
           </Link>
       </Dialog>
   )}
   else{ if (title === "خطأ" ){
     return (
-      <Dialog style={{backgroundColor:'whait'   }} open={openPopup} maxWidth="md" classes={{ paper: classes.dialogWrapper }}>
+      <Dialog style={{backgroundColor:'whait',textAlign:"center"}} open={openPopup} classes={{ paper: classes.dialogWrapper }}>
           <DialogTitle className={classes.dialogTitle}>
-              <div style={{ display: 'flex', backgroundColor:'whait',marginLeft:'60%'}}>
+              <div style={{ display: 'flex', backgroundColor:'whait'}}>
                   <Typography variant="h2" component="div" style={{ flexGrow: 1, color:'rgb(123, 42, 42)'}}>
                       {title}
                   </Typography>             
@@ -68,9 +73,9 @@ if (title === "انتهى التقييم" ){
       </Dialog>
       )}else{
         return (
-            <Dialog style={{backgroundColor:'whait'  }} open={openPopup} maxWidth="md" classes={{ paper: classes.dialogWrapper }}>
+            <Dialog style={{backgroundColor:'whait',textAlign:"center"}} open={openPopup} maxWidth="md" classes={{ paper: classes.dialogWrapper }}>
                 <DialogTitle className={classes.dialogTitle}>
-                    <div style={{ display: 'flex', backgroundColor:'whait', marginLeft:'60%'}}>
+                    <div style={{ display: 'flex', backgroundColor:'whait'}}>
                         <Typography variant="h2" component="div" style={{ flexGrow: 1, color:'green'}}>
                             {title}
                         </Typography>             

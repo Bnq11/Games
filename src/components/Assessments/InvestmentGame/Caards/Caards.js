@@ -1,11 +1,11 @@
+import './caard.css';
 
-import { useState } from 'react'
-import './caard.css'
-import Caard from './Caard'
-import { Line } from 'rc-progress'
-import Popup from '../../VSGame/Popup/Popup'
+import { useState } from 'react';
+
 import Fade from 'react-reveal';
 
+import Popup from '../../VSGame/Popup/Popup';
+import Caard from './Caard';
 
 function Caards(){
 
@@ -47,10 +47,12 @@ function Caards(){
     const [num, setnum] = useState(1);
     const [Score, setScore] = useState(0);
     const [Total, setTotal] = useState(0);
-    const [openPopup, setOpenPopup] = useState(false);
-
-
+    const [openPopup, setOpenPopup] = useState(false); 
+    const [Risk, setRisk] = useState(0);
+    const [loss, setLoss] = useState(0);
     
+
+
     function Update(){
      for (let index = 0; index < items.length; index++) {
         items[index].stat="";
@@ -59,6 +61,7 @@ function Caards(){
         items.sort(() => Math.random() - 0.5);
         setItems([...items])
     }
+
     function handleClick(id){
         console.log( items[id].id )
         if ( items[id].id !== 1 &&  items[id].stat === ""){
@@ -70,7 +73,8 @@ function Caards(){
                     items[id].stat = "active"
                     setItems([...items])
                     setnum(num +1 );
-                    setTotal(Total - 250)
+                    setLoss(loss+Score);
+                    setTotal(Total - Score)
                     setTimeout(()=>{
                     Update();
                     if (num === 30)
@@ -85,23 +89,29 @@ function Clicked(){
         Update();
         setScore(0);
         if (num === 30)
-        {setOpenPopup(true)}
+        {
+          CalculateScore ();
+          setOpenPopup(true);
+        }
 }
 
+function CalculateScore (){
+  var RiskRatio = ( Risk / 30 )*100 ;
+  var gain = Total;
+  var Loss = loss ;
+}
 //===========================================
-
-
-
 
     return (
        <div>
         <div className="progressbar">
         <div className="progressbar">
-          <div className="progressbar__label">{Math.floor((num*3.333))}%</div>
-        <progress className="progressbar__fill" value={num} max={15} />
+          <div className="progressbar__label">{Math.floor((num*3.3))}%</div>
+        <progress className="progressbar__fill" value={num} max={30} />
     </div>
       </div>
-      <Fade right>
+
+      <div className='cash-container shadow'>
         <div className="amount">
           <div className="icon-cash">
           <div className="cash"  style={{ 
@@ -117,9 +127,7 @@ function Clicked(){
             </div>
           </div>
         </div>
-      </Fade>
-      
-            <Fade right>
+
         <div className="amount">
           <div className="icon-cash">
           <div className="cash"  style={{ 
@@ -137,9 +145,12 @@ function Clicked(){
            </div>
           </div>
         </div>
-      </Fade>
+      </div>
+
       <Fade left >
-      <button className="button" onClick={Clicked}> <h3> جمع </h3></button>
+      <div className='button-justifyer50 '>
+      <button className="btntw float-right" onClick={Clicked}> جمع </button>
+      </div>
       </Fade>
        {/* <div className='progressBar'>
         <Line percent={num*3.333} />
@@ -149,9 +160,9 @@ function Clicked(){
         <div className='Score'><p> المجموع: {Total}</p>
         <p> مجموع الجولة {num} : {Score}</p></div>
         </div> */}
-        <div className="containerF">
+        <div className="containerF mx-auto">
             { items.map((item, index) => (
-                <Caard key={index} item={item} id={index} handleClick={handleClick} />
+                <Caard key={index} item={item} id={index} handleClick={handleClick} className="mx-auto card-adds"/>
             )) }
         </div>
         <Popup

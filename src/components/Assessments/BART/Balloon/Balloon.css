@@ -1,50 +1,44 @@
 .btnContainer{
+  margin-top: 4%;
   display: flex;
+  justify-content: center;
+  gap: 50px;
 }
-.buttonUp {
-    width: 110px;
-    height: 40px; 
-    border-radius: 3px; 
-    text-decoration: none;
-    color: rgb(241, 241, 246);
-    background-color: #1a70bc;
-    text-align: center;
-    align-items: center;
-    margin-left: 6%;
-    display:flex;
-    justify-content: center;
-    margin-top: 2%;
-    border: #2d537690;
-  }
-  .buttonUp:hover{
-    color: #f3f6f9;
-    background-color: #4b82b5ad;
-  } 
-  .buttonDown{
-    width: 110px;
-    height: 40px; 
-    border-radius: 3px; 
-    text-decoration: none;
-    color: rgb(241, 241, 246);
-    background-color: #1abc9c;
-    text-align: center;
-    align-items: center;
-    margin-left: 39.3%;
-    display:flex;
-    justify-content: center;
-    margin-top: 2%;
-    border: #2d537690;
 
-  }
-  .buttonDown:hover{
-    color: #f3f6f9;
-    background-color:  #1abc9cab;
-  } 
+.tbutton {
+  border-radius: 3px; 
+  border: #2d537690;
+  width: 10%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 26px;
+}
+
+.tbuttonColorCyan:hover{
+  color: #f3f6f9;
+  background-color: #4b82b5ad;
+} 
+
+.tbuttonColorBlue{
+  background-color: #4b82b5ad;
+  color: rgb(241, 241, 246);
+}
+
+.tbuttonColorCyan{
+  background-color: #1abc9c;
+  color: rgb(241, 241, 246);
+}
+
+.tbuttonColorBlue:hover{
+  color: #f3f6f9;
+  background-color:  #1abc9cab;
+} 
 
 .Score1{
-    margin-right: 10%;
-    text-align: right;
+  margin-right: 10%;
+  text-align: right;
 } 
+
 .imgContainer{
 display: flex;
 height: 400px;
@@ -71,11 +65,12 @@ progress::-webkit-progress-value {
   background-color: #1abc9c;
   border-radius: 10px;
 }
+
 .amount {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  margin-right: 50px;
+  margin-right: 10%;
 }
 
 .borrowed {
@@ -101,12 +96,14 @@ progress::-webkit-progress-value {
 .cash-name {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  font-size: 15px;
+  font-size: 26px;
 }
+
 .cash-amount{
-    color: #1abc9c;
-    font-size: 15px;
+  color: #1abc9c;
+  font-size: 26px;
 }
+
 .progressbar__label {
   position: absolute;
   left: 50%;
@@ -116,10 +113,26 @@ progress::-webkit-progress-value {
   font-size: 20px;
   font-weight: 700;
 }
+
 .progressbar {
   position: relative;
 }
 
 .progressbar__fill {
   width: 100%;
+}
+
+.cash-container{
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  float: right;
+  text-align: right;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin-right:2% ;
+  border: 1px rgba(0, 0, 0, 0.2) solid;
+  border-radius: 25px;
+  margin-top: 2%;
+
 }

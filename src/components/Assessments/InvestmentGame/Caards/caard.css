@@ -1,14 +1,15 @@
 
   
   .containerF{
-    height: 300px;
-    width: 600px;
+    height: auto;
+    width: 70%;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(4,1fr);
-    gap: 1em;
+    gap: 20px;
     background-color: #fae19d00;
-    margin-left: 20%;
+    justify-items: center;
+    margin-top: 4%;
   }
   
   .caard{
@@ -25,7 +26,9 @@
     animation: 2s hideCard linear;
     transition: transform 0.5s;
   }
+
   @keyframes hideCard{
+
     0%, 70%{
       transform: rotateY(0);
     }
@@ -33,6 +36,7 @@
       transform: rotateY(180deg);
     }
   }
+
   .caard img{
     max-width: 90px;
     max-height: 165px;  
@@ -40,9 +44,8 @@
     transform: scale(0);
   }
 
-  
   .caard.active{
-    transform: rotateY(0);
+    transform: rotateY(180deg);
   }
   
   .caard.active img{
@@ -95,3 +98,47 @@
     margin-left: 41%;
     text-align: right;
 } 
+
+.card-adds{
+  border: 1px rgb(000, 000, 000,0.5) solid;
+  border-radius: 5px;
+}
+
+@keyframes flipCard {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(180deg);
+  }
+}
+
+.button-justifyer50{
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row;
+  width: 54%;
+  height: 100%;
+  justify-content: end;
+  z-index: 1;
+  gap: 20px;
+  margin-top: 5%;
+}
+
+.btntw{
+    border-radius: 20px;
+      text-decoration: none;
+      color: rgb(241, 241, 246);
+      background-color: #657789;
+      border: 2px #000000 solid;
+      text-align: center;
+      font-size: 26px;
+      width: 15%;
+      z-index: 1;
+}
+
+.btntw:hover {
+  color: #f3f6f9;
+  background-color: #2e485f;
+}
