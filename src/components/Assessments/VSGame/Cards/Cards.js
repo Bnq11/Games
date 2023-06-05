@@ -165,6 +165,7 @@ function Cards(props){
     const [startTimer , setStartTimer] = useState(props);
     const [Time , setTime]= useState(0);
     const [ConsumedTime , setConsumedTime]= useState(0);
+    const [TotalTime , setTotalTime]= useState(0);
     
    
     useEffect(() => {
@@ -339,7 +340,7 @@ function CalculateScore (){
          var hour = Math.floor((Time / 60 )/ 60);
          var min = Math.floor((Time / 60)- (hour*60)) ;
          var sec = Math.floor(Time - (min*60)) ;
-         setConsumedTime (hour + ':' + min + ':' + sec );
+         setTotalTime (hour + ':' + min + ':' + sec );
       }
     
 }

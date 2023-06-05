@@ -23,19 +23,30 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path='/' element={<Main/>}> </Route>
-          <Route path='/VSGame' element={<Ready/>}></Route>
-          <Route path='/Cards' element={<Cards startTimer= {true}/>}></Route>
-          <Route path='/CPT' element={<ReadyS/>}></Route>
-          <Route path='/Letters' element={<Letters/>}></Route>
-          <Route path='/BART' element={<ReadyT/>}></Route>
-          <Route path='/Balloons' element={<Balloons/>}></Route>
-          <Route path='/InvestmentGame' element={<ReadyFo/>}></Route>
-          <Route path='/InvestmentCards' element={<Caards/>}></Route>
-          <Route path='/Ultimatum' element={<Ultimatum/>}></Route>
-          <Route exact path="/Layout" element={<Layout/>} />
+          <Route path='/' element={<Main />}> </Route>
+          {/*1. attention - visual scanning game */}
+          <Route path='/VSGame' element={<Ready />}></Route>
+          <Route path='/Cards' element={<Cards startTimer={true} />}></Route>
+
+          {/*1. attention - continous performance */}
+          <Route path='/CPT' element={<ReadyS />}></Route>
+          <Route path='/Letters' element={<Letters />}></Route>
+
+          {/*3. risk - balloon */}
+          <Route path='/BART' element={<ReadyT />}></Route>
+          <Route path='/Balloons' element={<Balloons />}></Route>
+
+          {/*3. risk - investment */}
+          <Route path='/InvestmentGame' element={<ReadyFo />}></Route>
+          <Route path='/InvestmentCards' element={<Caards />}></Route>
+
+          {/*2. decision making - ultimatum */}
+          <Route path='/Ultimatum' element={<Ultimatum />}></Route>
+
+          {/*2. decision making - lowa gambling */}
+          <Route exact path="/Layout" element={<Layout />} />
         </Routes>
-      </Router>  
+      </Router>
     </div>
   );
 }

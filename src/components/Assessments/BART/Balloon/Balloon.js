@@ -286,7 +286,7 @@ function collect(){
 function CalculateScore (){
   setRiskRatio( (Risk / 15)*100 );
   var gain = Total;
-  var Loss = loss 
+  var Loss = loss; 
 }
 return (
     <div className=" "> 
