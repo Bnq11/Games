@@ -150,6 +150,7 @@ function Ultimatum() {
   // Check the count value after every update
   useEffect(() => {
     if (count === 10) {
+      CalculateScore ();
       done_alert();
     }
   }, [count]);
@@ -167,7 +168,9 @@ useEffect(() => {
     }, 5000);
     return () => clearInterval(intervalId);
   }, []);
-
+  function CalculateScore (){
+   
+  }
   return Start === false ? (
     <Container fluid className="first-container">
       <ul class="circles">

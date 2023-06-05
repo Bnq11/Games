@@ -13,9 +13,9 @@ import {
 import Background from '../../../Background/Background';
 // import 'bootstrap/dist/css/bootstrap.css';
 import Popup from '../../VSGame/Popup/Popup';
+import Timer from "./Timer"
 
 function Letters(){
-
 // const notify = () => toast.success('اجابة صحيحة', {
 // position: "bottom-left",
 // autoClose: 2000,
@@ -59,14 +59,59 @@ useEffect(() => {
    return () => clearInterval(timerId)
   }
 }, [ startTimer ] )
+//===============================================
+const [minutes, setMinutes] = useState(14);
+const [seconds, setSeconds] = useState(0);
+const [milliseconds, setMilliseconds] = useState(0);
+const [isRunning, setIsRunning] = useState(true);
+
+const [showEndScreen, setShowEndScreen] = useState({
+  show: false,
+  // message: "Happy coding in 2023!",
+  //======================================
+});
 
 useEffect(() => {
+  let interval;
+  if (isRunning) {
+    interval = setInterval(() => {
+      if (milliseconds > 0) {
+        setMilliseconds((milliseconds) => milliseconds - 1);
+      } else if (seconds > 0) {
+        setSeconds((seconds) => seconds - 1);
+        setMilliseconds(99);
+      } else if (minutes > 0) {
+        setMinutes((minutes) => minutes - 1);
+        setSeconds(59);
+        setMilliseconds(99);
+      } 
+    }, 10);
+  }
+
+  if (minutes === 0 && seconds === 0 && milliseconds === 1) {
+    setShowEndScreen({ ...showEndScreen, show: true });
+    CalculateScore ();
+  }
+  return () => clearInterval(interval);
+}, [milliseconds, seconds, minutes, , showEndScreen.show]);
+const changeSeconds = (e) => {
+  setSeconds(e.target.value);
+};
+const changeMinutes = (e) => {
+  setMinutes(e.target.value);
+};
+
+//==================================================
+useEffect(() => {
     const interval = setInterval(() => {
-    const letter = String.fromCharCode(Math.floor(Math.random() * 26) + 65); // generate a random letter from A to Z
+      const letters= ["أ","ب","ت","ث","ج","ح","خ","د","ذ","ر","ز","س","ش","ص","ض","ط","ظ","ع","غ","ف","ق","ك","ل","م","ن","هـ","و","ي","X","X","X","X","X"];
+      const letter = letters[Math.floor(Math.random() * 33)]; // generate a random letter from A to Z
+
+      // const letter = String.fromCharCode(Math.floor(Math.random() * 26) + 65); // generate a random letter from A to Z
     setCurrentLetter(letter);
     console.log(letter);
     setOneAns(1);
-  }, 2500); // show each letter for 2.5 seconds
+  }, 1500); // show each letter for 1.5 seconds
   return () => clearInterval(interval);
 }, []);
 
@@ -76,7 +121,8 @@ const handleResponse = (Letter) => {
      CalculateScore ();
   } 
   
-  const responseDelay = (Time%2.5) ;
+ 
+  const responseDelay = (Time%1.5) ;
   setTotalResponseTime(TotalResponseTime+responseDelay)
   if (  ( Letter !== 'X') && oneAns === 1) {
     setCorrectCount(correctCount + 1);
@@ -92,7 +138,7 @@ const handleResponse = (Letter) => {
   setOneAns(0);
 }
 function CalculateScore (){
-  var numOfLetters = Math.floor(Time / 2.5) ;
+  var numOfLetters = Math.floor(Time / 1.5) ;
   var Target = correctCount ;
   var notTarget = incorrectCount ;
   var numOfnotTarget = numOfLetters - (Target+notTarget) ;
@@ -131,9 +177,25 @@ return (
       </div>
     </div>
     <div className='time-card shadow'>
-      <h1 className='timer'>الوقت: {(Time/ 60).toFixed(2) }  د</h1>
+      <h1 className='timer'> 
+     <Timer
+        milliseconds={milliseconds}
+        seconds={seconds}
+        minutes={minutes}
+        // hours={hours}
+        // changeSeconds={changeSeconds}
+        // changeMinutes={changeMinutes}
+        // changeHours={changeHours}
+      />
+      {/* الوقت <br/> {(Time / 60).toFixed(0) } : {(Time - ((Time / 60)*60)).toFixed(0)} */}
+      </h1> 
     </div>
-    <Background/>
+    {showEndScreen.show && (
+       <h1 className="title text-light">
+        {/* {showEndScreen.message} */}
+       </h1>
+    )}
+    {/* <Background/> */}
     <Popup
       title={"انتهى التقييم" }
       // children = {"النقاط : "+ Score}

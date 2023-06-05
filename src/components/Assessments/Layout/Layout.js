@@ -12,6 +12,9 @@ function Layout() {
   const [cash, setCash] = useState(0);
   const [amount, setAmount] = useState();
   const [count, setCount] = useState(1);
+  const [report , setReport]=useState('');
+  const [gain, setgain] = useState(0);
+  const [loss, setloss] = useState(0);
 
   function handleClick(cardName) {
     console.log(`Clicked on card ${cardName}`);
@@ -27,26 +30,32 @@ function Layout() {
 
     // Generate a random number to determine if the card is advantageous or disadvantageous
     const random = Math.random();
-    const isAdvantageous = random < probabilities[cardName][0];
+    const isAdvantageous = random < probabilities[cardName][1];
 
     // Calculate the amount earned or borrowed based on the selected card
     let amount = 0;
-    isAdvantageous
-      ? cardName === "A" || cardName === "B"
-        ? (amount = 100)
-        : (amount = 50)
-      : cardName === "A" || cardName === "B"
-      ? (amount = -500)
-      : cardName === "C"
-      ? (amount = -50)
-      : (amount = -250);
-
+    if (isAdvantageous){
+      if(cardName === "A" || cardName === "B") 
+      { amount = 100 ; setgain(gain+amount)} else{ amount = 50 ; setgain(gain+amount)}}
+      else{ 
+      if (cardName === "A" || cardName === "B")
+      { amount = -500; setloss(loss+amount)}
+      else{ 
+        if(cardName === "C" ){
+          amount = -50; setloss(loss+amount)
+        } else{
+       amount = -250; setloss(loss+amount)}
+      }
+      }
     // Update the amount of cash
     setCash((prevCash) => prevCash + amount);
     setCount((prevCount) => prevCount + 1);
     setIsAdvantageous(isAdvantageous);
     setAmount(amount);
     console.log("count", count);
+    setReport(report+'\n'+ "المحاولة :" +count+'\n'+"نوع البطاقة: "+cardName+"| مبلغ البطاقة: " +amount +"| المبلغ الأساسي: " + cash)
+    console.log(report)
+    
   }
 
 
@@ -67,10 +76,19 @@ function Layout() {
   // Check the count value after every update
   useEffect(() => {
     if (count === 100) {
+      CalculateScore ();
+      // console.log(cash,gain,loss, report)
       done_alert();
     }
   }, [count]);
 
+  function CalculateScore (){
+    var Cash = cash;
+    var Gain = gain;
+    var Loss = loss ;
+    var Report = report;
+    // report
+  }
   return (
     <Container fluid className="first-container">
       {/* First section */}
