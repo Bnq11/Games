@@ -11,6 +11,7 @@ import { TbClick } from 'react-icons/tb';
 import Fade from 'react-reveal';
 import { ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2';
+import Done from './../Done';
 
 import moneybagImage from './moneybag.png';
 
@@ -24,9 +25,9 @@ function Ultimatum() {
   const [totalAmount, setTotalAmount] = useState(0);
   const [colorIndex, setColorIndex] = useState(0);
   const colors = ["rgba(255, 255, 255, 0.75)", "rgb(200,200,219, 0.75)"];
-  console.log(count);
-  console.log(scenarios);
-  console.log(totalAmount);
+  // console.log(count);
+  // console.log(scenarios);
+  // console.log(totalAmount);
 
 
   function handleButtonClicksuccess(totalAmount) {
@@ -104,7 +105,7 @@ function Ultimatum() {
   }
 
   function getScenario() {
-    console.log(scenarios[count]);//print current object
+    // console.log(scenarios[count]);//print current object
     const currentScenario = scenarios[count];
     const TotalAmount = currentScenario ? currentScenario.totalAmount : 0;
     return scenarios[count]?.description;
@@ -124,6 +125,7 @@ function Ultimatum() {
       setAccept((prevAccept) => prevAccept + 1);
       console.log("accept",accept);
       handleButtonClicksuccess(scenarios[count]?.totalAmount,)
+      console.log(nextvalue)
     }else{
         setReject((prevReject) => prevReject + 1);
         console.log("reject",reject)
@@ -144,7 +146,8 @@ function Ultimatum() {
       width: "400px",
     }).then(() => {
       // Reload the page to restart the game
-      window.location.reload();
+      // window.location.reload();
+      <Done/>
     });
   }
   // Check the count value after every update
