@@ -11,10 +11,7 @@ export default axios.create({
     return await axios({
       method: "post",
       url: URLs.ADD_SCORE,
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //     "Authorization": `Bearer ${localStorage.getItem('token')}`
-    //   },
+
       data: ddata
     })
   }
