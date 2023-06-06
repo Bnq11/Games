@@ -74,3 +74,22 @@
 /* .timer{
   font-size: 26px;
 } */
+.btntcpt {
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 15px;
+  border: 3px solid #2E7105;
+  margin-top: 1%;
+  text-align: center;
+  font-size: 26px;
+  width: 30%;
+  z-index: 1;
+  color: #2E7105;
+}
+
+.btntcpt:hover{
+  background-color: #1C4A00;
+  border-radius: 15px;
+  border: 3px solid 2E7105;
+  color: white;
+}

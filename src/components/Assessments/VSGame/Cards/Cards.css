@@ -25,8 +25,8 @@
     margin-bottom: 5%;
   } 
   
-.progressbar__fill::-webkit-progress-value {
-  background-color: #1abc9c;
+.progressbar__fillvs::-webkit-progress-value {
+  background-color: #2E7105;
   transition: width 2s ease-in-out;
 }
 

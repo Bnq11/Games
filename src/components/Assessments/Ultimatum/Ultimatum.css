@@ -254,8 +254,8 @@ progress::-webkit-progress-value {
   margin:5px 0px;
 }
 
-.progressbar__fill::-webkit-progress-value {
-  background-color: #1abc9c;
+.progressbar__filluli::-webkit-progress-value {
+  background-color: #E9E2A3;
   transition: width 2s ease-in-out;
 }
 
@@ -316,7 +316,8 @@ progress::-webkit-progress-value {
   list-style: none;
   width: 20px;
   height: 20px;
-  background: rgba(12, 8, 232, 0.2);
+  background:#E9E2A3;
+   /* rgba(12, 8, 232, 0.2); */
   animation: animate 25s linear infinite;
   bottom: -150px;
 

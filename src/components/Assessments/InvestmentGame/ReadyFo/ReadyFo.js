@@ -65,7 +65,19 @@ function ReadyFo(){
         <button className="btnt2" onClick={handleOpen}>فيديو توضيحى</button>
    </div>
    }   
-   <Background/>
+   {/* <Background/> */}
+   <ul className="circlesRisk" style={{ height:"100%" }}>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul> 
 </div>
 )
     }export default ReadyFo

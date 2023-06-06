@@ -126,7 +126,7 @@ const handleResponse = (Letter) => {
       title: "!ممتاز ",
       text: "أنهيت الاختبار بنجاح",
       icon: "success",
-      confirmButtonColor: "#32437c",
+      confirmButtonColor: "#2E7105",
       confirmButtonText: "حسنا",
       width: "400px",
       showConfirmButton:true,
@@ -193,7 +193,7 @@ return (
       <br/><br/>
         <h1 className='letter'>{currentLetter}</h1>
         <br/><br/> <br/><br/> <br/><br/> <br/><br/>
-        <button className='btnt2 ' onClick={()=>handleResponse(currentLetter)}>هدف</button>
+        <button className='btntcpt ' onClick={()=>handleResponse(currentLetter)}>هدف</button>
       </div>
     </div>
     <div 

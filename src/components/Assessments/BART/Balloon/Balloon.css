@@ -6,7 +6,7 @@
 }
 
 .tbutton {
-  border: 3px solid #32437c;
+  border: 3px solid #9F3D3D;
   width: 10%;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -16,22 +16,22 @@
 
 .tbuttonColorCyan:hover{
   color: #f3f6f9;
-  background-color: #4b82b5ad;
+  /* background-color: #F5CECE; */
 } 
 
 .tbuttonColorBlue{
-  background-color: #4b82b5ad;
-  color: rgb(241, 241, 246);
+  background-color: #F5CECE;
+  color: #9F3D3D;
 }
 
 .tbuttonColorCyan{
-  background-color: #1abc9c;
-  color: rgb(241, 241, 246);
+  background-color: #F5CECE;
+  color: #9F3D3D;
 }
 
 .tbuttonColorBlue:hover{
   color: #f3f6f9;
-  background-color:  #1abc9cab;
+  /* background-color:  #1abc9cab; */
 } 
 
 .Score1{
@@ -153,4 +153,9 @@ progress::-webkit-progress-value {
   border-radius: 25px;
   margin-top: 2%;
   padding: 15px
+}
+
+.progressbar__fillubal::-webkit-progress-value {
+  background-color: #F5CECE;
+  transition: width 2s ease-in-out;
 }

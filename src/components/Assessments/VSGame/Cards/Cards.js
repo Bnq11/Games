@@ -325,7 +325,7 @@ if ( num < 127 ){
         title: "!ممتاز ",
         text: "أنهيت الاختبار بنجاح",
         icon: "success",
-        confirmButtonColor: "#32437c",
+        confirmButtonColor: "#2E7105",
         confirmButtonText: "حسنا",
         width: "400px",
         showConfirmButton:true,
@@ -386,7 +386,7 @@ function Correct(){
         title: "!ممتاز ",
         text: "اختيار صحيح",
         icon: "success",
-        confirmButtonColor: "#32437c",
+        confirmButtonColor: "#2E7105",
         confirmButtonText: "حسنا",
         width: "400px",
         showConfirmButton:true,
@@ -401,7 +401,7 @@ function Wrong(){
         title: "!حاول مرة اخرة ",
         text: "اختيار خاطى",
         icon: 'error',
-        confirmButtonColor: "#32437c",
+        confirmButtonColor: "#2E7105",
         confirmButtonText: "حسنا",
         width: "400px",
         showConfirmButton:true,
@@ -418,7 +418,7 @@ function Wrong(){
           <div className="progressbar">
         <div className="progressbar">
         <div className="progressbar__label">{Math.floor((num*0.78))}%</div>
-        <progress className="progressbar__fill" value={num} max={128} />
+        <progress className="progressbar__fillvs" value={num} max={128} />
     </div>
       </div>
        {isStarted && starts.map((start, index) => (

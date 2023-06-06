@@ -9,7 +9,7 @@
     gap: 20px;
     background-color: #fae19d00;
     justify-items: center;
-    margin-top: 4%;
+    margin-top: 1%;
   }
   
   .caard{
@@ -22,7 +22,7 @@
     border-radius: 5px; 
     display: flex;
     border-radius: 5px;
-    transform: rotateY(180deg);
+    /* transform: rotateY(180deg); */
     animation: 2s hideCard linear;
     transition: transform 0.5s;
   }
@@ -45,7 +45,7 @@
   }
 
   .caard.active{
-    transform: rotateY(180deg);
+    /* transform: rotateY(180deg); */
   }
   
   .caard.active img{
@@ -110,7 +110,7 @@
   }
 
   to {
-    transform: rotateY(180deg);
+    transform: rotateY(0deg);
   }
 }
 
@@ -126,7 +126,7 @@
   margin-top: 5%;
 }
 
-.btntw{
+/* .btntw{
     border-radius: 20px;
       text-decoration: none;
       color: rgb(241, 241, 246);
@@ -141,4 +141,22 @@
 .btntw:hover {
   color: #f3f6f9;
   background-color: #2e485f;
+} */
+
+
+.btnco {
+  border: 3px solid #9F3D3D;
+  width: 20%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-size: 26px;
+  border-radius: 15px;
+  background-color: #F5CECE;
+  color: #9F3D3D;
+  margin-right: 54%;
 }
+
+.btnco:hover{
+  color: #f3f6f9;
+  /* background-color: #F5CECE; */
+} 

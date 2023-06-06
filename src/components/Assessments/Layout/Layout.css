@@ -22,7 +22,10 @@ progress::-webkit-progress-value {
   background-color: #1abc9c;
   border-radius: 10px;
 }
-
+.progressbar__filllay::-webkit-progress-value {
+  background-color: #E9E2A3;
+  transition: width 2s ease-in-out;
+}
 
 .amountt{
   display:flex;

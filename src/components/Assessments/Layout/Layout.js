@@ -13,6 +13,7 @@ import {
 } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Background from '../../Background/Background';
 
 function Layout() {
   const [isAdvantageous, setIsAdvantageous] = useState();
@@ -68,12 +69,12 @@ function Layout() {
       title: "!ممتاز ",
       text: "أنهيت الاختبار بنجاح",
       icon: "success",
-      confirmButtonColor:"#32437c",
+      confirmButtonColor:"#89760F",
       confirmButtonText: "حسنا",
       width: "400px",
     }).then(() => {
       // Reload the page to restart the game
-      navigate('/')
+      navigate('/Done')
     });
   }
 
@@ -98,13 +99,13 @@ function Layout() {
             <div className="progressbar">
         <div className="progressbar">
           <div className="progressbar__label">{Math.floor((count / 10) * 10)}%</div>
-        <progress className="progressbar__fill" value={count} max={100} />
+        <progress className="progressbar__filllay" value={count} max={100} />
     </div>
       </div>
 
       {/* second section */}
       <div className="amountt shadow">
-        <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_it8yjgkh.json"  background="transparent"  speed="1"  style={{ width: '100px', height: '40px' }}  autoplay></lottie-player>
+        <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_it8yjgkh.json"  background="transparent"  speed="1"  style={{ width: '100px', height: '55px' }}  autoplay></lottie-player>
         <div className="casht">
           <h4 className="cash-namet">الربح</h4>
           <h4 className="cash-namet">:</h4>
@@ -148,7 +149,7 @@ function Layout() {
           <div className="alert-body">
             {/* <VscDebugStart size={130} color="black" className='svgGrowth' /> */}
             <div className="alert-message">
-              <h3>اضغط احد الكروت للبدأ</h3>
+              <h3>اختر بطاقة للبدأ</h3>
             </div>
           </div>
         )}
@@ -175,6 +176,7 @@ function Layout() {
           <h3 className="card-name">بطاقة أ</h3>{" "}
         </div>
       </div>
+      {/* <Background/> */}
     </Container>
   );
 }

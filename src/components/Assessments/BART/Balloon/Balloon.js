@@ -275,7 +275,9 @@ function collect(score){
     imageHeight: 200,
     imageAlt: 'Custom image',
     background: '#dadada', // Set the background to a semi-transparent black color
-    })
+    confirmButtonColor: '#9F3D3D ',
+    confirmButtonText: 'تم',
+  })
     //
     setScore(0) 
     setIndex(Math.floor(Math.floor((Math.random()*3)))) //New Balloon
@@ -302,7 +304,7 @@ function collect(score){
         title: "!ممتاز ",
         text: "أنهيت الاختبار بنجاح",
         icon: "success",
-        confirmButtonColor: "#32437c",
+        confirmButtonColor: "#9F3D3D",
         confirmButtonText: "حسنا",
         width: "400px",
         showConfirmButton:true,
@@ -361,7 +363,7 @@ return (
      <div className="progressbar">
         <div className="progressbar">
           <div className="progressbar__label">{Math.floor(((num-1)*6.66))}%</div>
-        <progress className="progressbar__fill" value={num-1} max={15} />
+        <progress className="progressbar__fillubal" value={num-1} max={15} />
     </div>
       </div>
       <div className='cash-container shadow '>

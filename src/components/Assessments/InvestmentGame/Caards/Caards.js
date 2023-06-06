@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import moneybagImage from '../../Ultimatum/moneybag.png';
 import Popup from '../../VSGame/Popup/Popup';
 import Caard from './Caard';
-
+import {useNavigate} from "react-router-dom"
 function Caards(){
 
     const [items, setItems] = useState([
@@ -52,7 +52,7 @@ function Caards(){
     const [openPopup, setOpenPopup] = useState(false);
     const [loss, setLoss] = useState(0);
     const [Risk, setRisk] = useState(0);
-
+    const navigate = useNavigate();
 
 
     function Update(){
@@ -91,9 +91,11 @@ function Caards(){
     }
     function handleButtonClickfailure(totalAmount) {
       Swal.fire({
-      title: '!حظ موفق',
+      title: '!حظ أوفر',
       text:  `لقد خسرت ${totalAmount} ريال`,
-      background: '#dadada'
+      background: '#dadada',
+      confirmButtonColor: "#9F3D3D",
+        confirmButtonText: "تم",  
       }) 
     }
 function Clicked(){
@@ -107,7 +109,9 @@ function Clicked(){
         imageHeight: 200,
         imageAlt: 'Custom image',
         background: '#dadada', // Set the background to a semi-transparent black color
-        })
+        confirmButtonColor: "#9F3D3D",
+        confirmButtonText: "تم",  
+      })
         Update();
         setScore(0);
         if (num === 30){
@@ -115,13 +119,14 @@ function Clicked(){
             title: "!ممتاز ",
             text: "أنهيت الاختبار بنجاح",
             icon: "success",
-            confirmButtonColor: "#32437c",
+            confirmButtonColor: "#9F3D3D",
             confirmButtonText: "حسنا",
             width: "400px",
             showConfirmButton:true,
           }).then(() => {
             // Reload the page to restart the game
-            window.location.reload();
+            // window.location.reload();
+            navigate("/Done")
           });
   // }
         }
@@ -139,7 +144,7 @@ function CalculateScore (){
         <div className="progressbar">
         <div className="progressbar">
           <div className="progressbar__label">{Math.floor(((num-1)*3.333))}%</div>
-        <progress className="progressbar__fill" value={(num-1)} max={30} />
+        <progress className="progressbar__fillubal" value={(num-1)} max={30} />
     </div>
       </div>
 
@@ -148,7 +153,7 @@ function CalculateScore (){
         <div className='amount-containerc'>
 
         <div className="amount1">
-        <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_it8yjgkh.json"  background="transparent"  speed="1"  style={{ width: '100px', height: '60px' }} autoplay></lottie-player>
+
 
           <div className="icon-cash">
           <div className="cash"  style={{ 
@@ -162,30 +167,29 @@ function CalculateScore (){
               {Total}{" "}
             </h4>
             <h4 className="cash-name"> ريال </h4>
-            
+            <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_it8yjgkh.json"  background="transparent"  speed="1"  style={{ width: '100px', height: '60px' }} autoplay></lottie-player>
            </div>
           </div>
         </div>
         </div>
         </div>
         <div className='cash-container shadow'>
-                
-
                 <div className='amount-containerc'>
                   
                 <div className="amount1">
-                <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_it8yjgkh.json"  background="transparent"  speed="1"  style={{ width: '0px', height: '60px' }} ></lottie-player>
                   <div className="icon-cash">
                   <div className="cash"  style={{ 
                     transition: "background-color 1s ease-in-out" 
                     }}>
-                    <h4 className="cash-name">مجموع الجولة الحالي</h4>
+                    <h4 className="cash-name">المجموع الحالي</h4>
                     <h4 className="cash-name">:</h4>
                     <h4 className="cash-amount">
                       {" "}
                       {Score}{" "}
                     </h4> 
                     <h6 className="cash-name"> ريال   <br/> </h6>
+                    <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_it8yjgkh.json"  background="transparent"  speed="1"  style={{ width: '0px', height: '60px' }} autoplay></lottie-player>
+
                     </div>
                   </div>
                 </div>
@@ -197,7 +201,7 @@ function CalculateScore (){
 
       <Fade left >
       <div className='button-justifyer50 '>
-      <button className="btntw float-right" onClick={Clicked}> جمع </button>
+      <button className="btnco float-right" onClick={Clicked}> جمع </button>
       </div>
       </Fade>
        {/* <div className='progressBar'>

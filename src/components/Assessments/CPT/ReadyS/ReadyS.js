@@ -62,7 +62,19 @@ function ReadyS(){
             <Link to="/Letters" className="btnt">ابدأ</Link>
             <button className="btnt2" onClick={handleOpen}>فيديو توضيحى</button>
         </div>}
-        <Background/>
+        {/* <Background/> */}
+        <ul className="circlesAtt" style={{ height:"100%" }}>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul> 
     </div>
 )
 

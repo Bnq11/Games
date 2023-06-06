@@ -85,7 +85,19 @@ const handleClick = () => {
             </div>
             }
    
-            <Background height="100%"/>
+            {/* <Background height="100%"/> */}
+            <ul className="circlesRisk" style={{ height:"100%" }}>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul> 
         </div>
 )
 

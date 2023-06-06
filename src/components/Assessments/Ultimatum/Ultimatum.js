@@ -52,14 +52,18 @@ function Ultimatum() {
     imageHeight: 200,
     imageAlt: 'Custom image',
     background: '#dadada', // Set the background to a semi-transparent black color
-    })
+    confirmButtonColor: "#89760F",
+    confirmButtonText: "تم",  
+  })
   }
 
   function handleButtonClickfailure(totalAmount) {
     Swal.fire({
     title: '!حظ أوفر',
     text:  `لقد خسرت ${totalAmount} ريال`,
-    background: '#dadada'
+    background: '#dadada',
+    confirmButtonColor: "#89760F",
+    confirmButtonText: "تم",  
     }) 
   }
 
@@ -158,7 +162,7 @@ function Ultimatum() {
       title: "!ممتاز ",
       text: "أنهيت الاختبار بنجاح",
       icon: "success",
-      confirmButtonColor: "#32437c",
+      confirmButtonColor: "#89760F",
       confirmButtonText: "حسنا",
       width: "400px",
     }).then(() => {
@@ -263,7 +267,7 @@ useEffect(() => {
       <div className="progressbar">
         <div className="progressbar">
           <div className="progressbar__label">{Math.floor((count / 10) * 100)}%</div>
-        <progress className="progressbar__fill" value={count} max={10} />
+        <progress className="progressbar__filluli" value={count} max={10} />
     </div>
       </div>
       <ToastContainer />
@@ -271,7 +275,7 @@ useEffect(() => {
       <Fade right>
         <div className="amount">
           <div className="icon-cash">
-          <div className="cash1"  style={{ backgroundColor: colors[colorIndex], transition: "background-color 1s ease-in-out" }}>
+          <div className="cash1"  style={{ backgroundColor: "whait", }}>
             <h1 className="cash-name">مجموع الربح الان</h1>
             <h1 className="cash-name">:</h1>
             <h1 className="cash-amount">

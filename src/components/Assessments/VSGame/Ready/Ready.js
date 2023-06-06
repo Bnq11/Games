@@ -110,7 +110,19 @@ function Ready(){
             </div>
             } */}
 
-            <Background/> 
+            {/* <Background/>  */}
+            <ul className="circlesAtt" style={{ height:"100%" }}>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul> 
         </div>
 
     )
