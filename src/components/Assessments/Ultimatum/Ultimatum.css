@@ -140,7 +140,7 @@ progress::-webkit-progress-value {
   padding-left: 10rem;
 }
 
-.card1 {
+.cardu {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -227,7 +227,7 @@ progress::-webkit-progress-value {
   margin: auto;
 }
 
-.hand-card{
+.hand-cardu{
   background-color: #dadada;
   width: 15%;
   text-align: center;

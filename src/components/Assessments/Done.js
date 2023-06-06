@@ -2,19 +2,16 @@ import React, {
     useEffect,
     useState,
   } from 'react';
-import Swal from 'sweetalert2';
+
 
 function Done(){
-    function done(){
-    Swal.fire({
-        text: "أنهيت الاختبار بنجاح",
-        icon: "success",
-        width: "400px",
-      })
-    }
+
     return(
-    <div>
-    {done()}
+    <div >
+    <center>
+     <img src='/img/done-icon.png' style={{  width:'20%' ,marginTop:"10%" }}></img>
+     <h3>.شكرًا لك، تم تسليم الاختبار بنجاح</h3>
+     </center>
     </div>
 )
 }
