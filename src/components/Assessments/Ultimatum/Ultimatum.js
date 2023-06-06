@@ -62,9 +62,8 @@ function Ultimatum() {
     const recipientAmount = offerAmount - proposerAmount; 
     const splitAmount = proposerAmount;
     const totalAmount = proposerAmount;
-    setInfo('\n'+"المبلغ المعروض: "+ offerAmount +"\n المبلغ الحاصل عليه: "+proposerAmount+"\n المبلغ المعطى: "+ recipientAmount)
-    setReport(report+''+info);
-    console.log(report);
+    const Info='\n'+"المبلغ المعروض: "+ offerAmount +"\n المبلغ الحاصل عليه: "+proposerAmount+"\n المبلغ المعطى: "+ recipientAmount;
+   
     const description = (
         <div class="message-container">
           <Fade left>
@@ -91,7 +90,7 @@ function Ultimatum() {
         </div>
     );
 
-    return { offerAmount, splitAmount, description, totalAmount };
+    return { offerAmount, splitAmount, description, totalAmount, Info };
   }
 
   function generateScenarios(numScenarios) {
@@ -128,16 +127,16 @@ function Ultimatum() {
       setCash((prevCash) => prevCash + scenarios[count]?.totalAmount);
       setTotalAmount()
       setAccept((prevAccept) => prevAccept + 1);
-      setReport(report+'\n المحاولة'+count+": تم قبولها")
+      setReport(report+'\n المحاولة'+(count+1)+": تم قبولها"+scenarios[count]?.Info)
       console.log("accept",accept);
-      console.log(report);
+      console.log(report)
       handleButtonClicksuccess(scenarios[count]?.totalAmount,)
       console.log(nextvalue)
     }else{
         setReject((prevReject) => prevReject + 1);
-        setReport(report+'\n المحاولة'+count+": تم رفضها")
+        setReport(report+'\n المحاولة'+(count+1)+": تم رفضها"+scenarios[count]?.Info)
         console.log("reject",reject)
-        console.log(report);
+        console.log(report)
         handleButtonClickfailure(scenarios[count]?.totalAmount)
         console.log(nextvalue)
     }
@@ -180,6 +179,7 @@ useEffect(() => {
     return () => clearInterval(intervalId);
   }, []);
   function CalculateScore (){
+   var FinalReport = report;
    
   }
   return Start === false ? (
