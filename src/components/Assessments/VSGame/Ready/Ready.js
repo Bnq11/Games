@@ -48,9 +48,14 @@ function Ready(){
                 }
                 
              </div>
+             <div className='space w-100'>
                 <button className='btntrvs m-0' onClick={()=>{setCard1(true);
                setcardin(() => false);}}>
                     {'< '} التالي</button>
+                <button className='btntrvs m-0' onClick={()=>{setCard1(true);
+               setcardin(() => false);}}>
+                    {'> '} السابق</button>
+            </div>
                 </div>}
                 {card1 &&
                 <div style={{height:"fit-content"}} className='headersandbutton my-auto'>
