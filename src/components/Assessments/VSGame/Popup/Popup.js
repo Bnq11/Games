@@ -14,7 +14,7 @@ import { green } from '@mui/material/colors';
 const useStyles = makeStyles(theme => ({
   dialogWrapper: {
     backgroundColor:'whait',
-    width:"300px",
+    width:"auto",
     height:"auto",
     position: 'absolute',
     
@@ -65,7 +65,7 @@ if (title === "انتهى التقييم" ){
       <Dialog style={{backgroundColor:'whait',textAlign:"center"}} open={openPopup} classes={{ paper: classes.dialogWrapper }}>
           <DialogTitle className={classes.dialogTitle}>
               <div style={{ display: 'flex', backgroundColor:'whait'}}>
-                  <Typography variant="h2" component="div" style={{ flexGrow: 1, color:'rgb(123, 42, 42)'}}>
+                  <Typography variant="h2" component="div" style={{ flexGrow: 1, color:'rgb(123, 42, 42)',padding:'100px'}}>
                       {title}
                   </Typography>             
               </div>
@@ -76,7 +76,7 @@ if (title === "انتهى التقييم" ){
             <Dialog style={{backgroundColor:'whait',textAlign:"center"}} open={openPopup} maxWidth="md" classes={{ paper: classes.dialogWrapper }}>
                 <DialogTitle className={classes.dialogTitle}>
                     <div style={{ display: 'flex', backgroundColor:'whait'}}>
-                        <Typography variant="h2" component="div" style={{ flexGrow: 1, color:'green'}}>
+                        <Typography variant="h2" component="div" style={{ flexGrow: 1, color:'green',padding:'100px'}}>
                             {title}
                         </Typography>             
                     </div>

@@ -6,12 +6,12 @@
 }
 
 .tbutton {
-  border-radius: 3px; 
-  border: #2d537690;
+  border: 3px solid #32437c;
   width: 10%;
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 26px;
+  border-radius: 15px;
 }
 
 .tbuttonColorCyan:hover{
@@ -70,7 +70,7 @@ progress::-webkit-progress-value {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  margin-right: 10%;
+  width: 100%;
 }
 
 .borrowed {
@@ -83,8 +83,6 @@ progress::-webkit-progress-value {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row-reverse;
-  background-color: rgba(255, 255, 255, 0.75);
-  border-radius: 1rem;
 }
 
 .icon-cash{
@@ -124,15 +122,35 @@ progress::-webkit-progress-value {
 
 .cash-container{
   display: flex;
-  flex-direction: column;
-  width: 25%;
+  flex-direction: row;
   float: right;
   text-align: right;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  margin-right:2% ;
+  margin-right:1% ;
+  border: 1px rgba(0, 0, 0, 0.2) solid;
+  border-radius: 25px;
+  margin-top: 1%;
+  padding: 15px
+}
+
+.amount-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.amount-containerc {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cash-containerl {
+  display: flex;
+  flex-direction: row;
+  float: left;
+  text-align: right;
+  margin-left: 1%;
   border: 1px rgba(0, 0, 0, 0.2) solid;
   border-radius: 25px;
   margin-top: 2%;
-
+  padding: 15px
 }

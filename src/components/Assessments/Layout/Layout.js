@@ -1,11 +1,18 @@
-import "./Layout.css";
-import Swal from "sweetalert2";
+import './Layout.css';
 
-import React, { useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
-import { GiCardRandom } from "react-icons/gi";
-import { RiEmotionHappyLine, RiEmotionUnhappyLine } from "react-icons/ri";
-import { VscDebugStart } from "react-icons/vsc";
+import React, {
+  useEffect,
+  useState,
+} from 'react';
+
+import { Container } from 'react-bootstrap';
+import { GiCardRandom } from 'react-icons/gi';
+import {
+  RiEmotionHappyLine,
+  RiEmotionUnhappyLine,
+} from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function Layout() {
   const [isAdvantageous, setIsAdvantageous] = useState();
@@ -15,6 +22,7 @@ function Layout() {
   const [report , setReport]=useState('');
   const [gain, setgain] = useState(0);
   const [loss, setloss] = useState(0);
+  const navigate = useNavigate()
 
   function handleClick(cardName) {
     console.log(`Clicked on card ${cardName}`);
@@ -34,19 +42,16 @@ function Layout() {
 
     // Calculate the amount earned or borrowed based on the selected card
     let amount = 0;
-    if (isAdvantageous){
-      if(cardName === "A" || cardName === "B") 
-      { amount = 100 ; setgain(gain+amount)} else{ amount = 50 ; setgain(gain+amount)}}
-      else{ 
-      if (cardName === "A" || cardName === "B")
-      { amount = -500; setloss(loss+amount)}
-      else{ 
-        if(cardName === "C" ){
-          amount = -50; setloss(loss+amount)
-        } else{
-       amount = -250; setloss(loss+amount)}
-      }
-      }
+    isAdvantageous
+      ? cardName === "A" || cardName === "B"
+        ? (amount = 100)
+        : (amount = 50)
+      : cardName === "A" || cardName === "B"
+      ? (amount = -500)
+      : cardName === "C"
+      ? (amount = -50)
+      : (amount = -250);
+
     // Update the amount of cash
     setCash((prevCash) => prevCash + amount);
     setCount((prevCount) => prevCount + 1);
@@ -55,7 +60,6 @@ function Layout() {
     console.log("count", count);
     setReport(report+'\n'+ "المحاولة :" +count+'\n'+"نوع البطاقة: "+cardName+"| مبلغ البطاقة: " +amount +"| المبلغ الأساسي: " + cash)
     console.log(report)
-    
   }
 
 
@@ -69,7 +73,7 @@ function Layout() {
       width: "400px",
     }).then(() => {
       // Reload the page to restart the game
-      window.location.reload();
+      navigate('/')
     });
   }
 
@@ -77,11 +81,9 @@ function Layout() {
   useEffect(() => {
     if (count === 100) {
       CalculateScore ();
-      // console.log(cash,gain,loss, report)
       done_alert();
     }
   }, [count]);
-
   function CalculateScore (){
     var Cash = cash;
     var Gain = gain;
@@ -90,24 +92,30 @@ function Layout() {
     // report
   }
   return (
-    <Container fluid className="first-container">
+    <Container fluid className="first-containerr ">
       {/* First section */}
-      <div className="progressbar">
-        <progress value={count} max={100} />
+ 
+            <div className="progressbar">
+        <div className="progressbar">
+          <div className="progressbar__label">{Math.floor((count / 10) * 10)}%</div>
+        <progress className="progressbar__fill" value={count} max={100} />
+    </div>
       </div>
 
       {/* second section */}
-      <div className="amount">
-        <div className="cash">
-          <h3 className="cash-name">الربح</h3>
-          <h3 className="cash-name">:</h3>
-          <h3 className="cash-name"></h3>
-          <h3 className={cash > 0 ? "positive" : cash < 0 ? "negative" : ""}>
+      <div className="amountt shadow">
+        <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_it8yjgkh.json"  background="transparent"  speed="1"  style={{ width: '100px', height: '40px' }}  autoplay></lottie-player>
+        <div className="casht">
+          <h4 className="cash-namet">الربح</h4>
+          <h4 className="cash-namet">:</h4>
+          <h4 className="cash-namet"></h4>
+          <h4 className={cash > 0 ? "positive cash-namet" : cash < 0 ? "negative cash-namet" : ""}>
             {" "}
             {cash}{" "}
-          </h3>
-          <h3 className="cash-name"> ريال </h3>
+          </h4>
+          <h4 className="cash-namet"> ريال </h4>
         </div>
+        
       </div>
 
       {/* third section */}
@@ -131,16 +139,16 @@ function Layout() {
           <div className="alert-body">
             <RiEmotionUnhappyLine size={100} color="rgb(211, 81, 81)" />
             <div className="alert-message">
-              <h3 className="titleLose"> خسرت</h3>
-              <h3 className="alert-negative">{amount}</h3>
-              <h3 className="titleLose"> ريال </h3>
+              <h4 className="titleLose"> خسرت</h4>
+              <h4 className="alert-negative">{amount}</h4>
+              <h4 className="titleLose"> ريال </h4>
             </div>
           </div>
         ) : (
           <div className="alert-body">
-            <VscDebugStart size={130} color="black" />
+            {/* <VscDebugStart size={130} color="black" className='svgGrowth' /> */}
             <div className="alert-message">
-              <h3> انقر على بطاقة للبدء</h3>
+              <h3>اضغط احد الكروت للبدأ</h3>
             </div>
           </div>
         )}
@@ -148,22 +156,22 @@ function Layout() {
       {/* fourth section */}
       <div className="card-deck">
         <div className="card5" onClick={() => handleClick("D")}>
-          <GiCardRandom size={200} color="32437c" />
+          <GiCardRandom className='svgGrowth' size={200} color="32437c" />
           <h3 className="card-name">بطاقة د</h3>
         </div>
 
         <div className="card5" onClick={() => handleClick("C")}>
-          <GiCardRandom size={200} color="32437c" />
+          <GiCardRandom className='svgGrowth' size={200} color="32437c" />
           <h3 className="card-name">بطاقة ج</h3>{" "}
         </div>
 
         <div className="card5" onClick={() => handleClick("B")}>
-          <GiCardRandom size={200} color="32437c" />
+          <GiCardRandom className='svgGrowth' size={200} color="32437c" />
           <h3 className="card-name">بطاقة ب</h3>{" "}
         </div>
 
         <div className="card5" onClick={() => handleClick("A")}>
-          <GiCardRandom size={200} color="32437c" />
+          <GiCardRandom className='svgGrowth' size={200} color="32437c" />
           <h3 className="card-name">بطاقة أ</h3>{" "}
         </div>
       </div>

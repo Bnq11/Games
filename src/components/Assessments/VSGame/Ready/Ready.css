@@ -6,8 +6,6 @@
 
 h1{
   text-align: center;
-  margin-bottom:  1%;
-  margin-top: 1%;
 }
 
 .container{
@@ -19,18 +17,21 @@ h1{
 }
 
 .btn {
-  border-radius: 20px; 
-  color: rgb(241, 241, 246);
-  background-color: #657789;
   margin-top: 1%;
-  border: 2px #000000 solid;
   z-index: 1;
   width: 7%;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 15px;
+  border: 3px solid #32437c;
+  font-size: 26px;
+  font-weight: 700;
 }
 
 .btn:hover{
-  color: #f3f6f9;
-  background-color: #2e485f;
+  background-color: rgb(200, 200, 219, 0.90);
+  border-radius: 15px;
+  border: 3px solid rgba(255, 255, 255);
+  color: rgb(255, 255, 255)
 } 
   
 .tips{
@@ -39,6 +40,7 @@ h1{
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 20px;
+  flex-direction: column;
 }
 
 .tips-header{
@@ -47,12 +49,21 @@ h1{
   text-align: right;
   font-size: 26px;
   line-height: 36px;
-  padding: 15px;
-  border: 1px black solid;
-  border-radius: 30px;
-  background: #ffffff;
+
 }
 
 .title{
   font-size: 46px;
+  padding-top: 2%;
+  padding-bottom: 1%;
+}
+
+.headersandbutton{
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  padding: 10px;
+  border: 1px black solid;
+  border-radius: 30px;
+  width: 100%;
 }

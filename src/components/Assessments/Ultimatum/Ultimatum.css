@@ -41,6 +41,13 @@ progress::-webkit-progress-value {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row-reverse;
+  border-radius: 1rem;
+
+}
+.cash1 {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
   background-color: rgba(255, 255, 255, 0.75);
   border-radius: 1rem;
 
@@ -100,10 +107,10 @@ progress::-webkit-progress-value {
 .alert-message {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: end;
-  align-items: end;
-  width: 75%;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
 }
 
 .description {
@@ -140,7 +147,7 @@ progress::-webkit-progress-value {
   padding-left: 10rem;
 }
 
-.cardu {
+.card1 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -155,6 +162,7 @@ progress::-webkit-progress-value {
   margin: 5px 0;
   padding: 0 10px;
   border: 1px solid black;
+  background-color: #fefefe !important;
 }
 .accept {
   color: black;
@@ -227,8 +235,7 @@ progress::-webkit-progress-value {
   margin: auto;
 }
 
-.hand-cardu{
-  background-color: #dadada;
+.hand-card{
   width: 15%;
   text-align: center;
   border-radius: 50%;
@@ -280,6 +287,8 @@ progress::-webkit-progress-value {
   background-color: rgba(255, 255, 255, 0.75);
   border-radius: 15px;
   border: 3px solid #32437c;
+  font-size: 26px;
+  font-weight: 700;
 }
 
 .startbutton:hover {

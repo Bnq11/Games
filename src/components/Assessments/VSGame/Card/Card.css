@@ -6,6 +6,7 @@
     border-radius:12px; 
     width: 152px;
     height: 203px; 
+    transition: transform 0.3s ease-in-out;
    }
   
   .card img{
@@ -14,3 +15,8 @@
     border-width: 20px;
     border-color:black;
   } 
+  
+  .card:hover {
+      transform: scale(1.1);
+  }
+  

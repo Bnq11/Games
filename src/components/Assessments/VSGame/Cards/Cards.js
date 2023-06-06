@@ -4,6 +4,9 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import {useNavigate} from "react-router-dom"
+
+import Swal from 'sweetalert2';
 
 import Card from '../Card/Card';
 import CardF from '../CardF/CardF';
@@ -140,7 +143,8 @@ function Cards(props){
             { id: 63, img: '/img/4ys.png', stat: "" },
             { id: 64, img: '/img/4yt.png', stat: "" },
         ].sort(() => Math.random() - 0.5))
-   
+        const navigate = useNavigate();
+
         const [cards] = useState([
         { id: 1, img: '/img/1rt.png', stat:"active" },
         { id: 2, img: '/img/2gs.png',  stat:"active"},
@@ -312,61 +316,105 @@ if ( num < 127 ){
         items[num].stat="";
         items[num+1].stat = "active";
         setnum(num+1);
-        if (num === 63 ){
-            CalculateScore();}
+        console.log(items);
    } else {if (num === 127 ){
     CalculateScore();
-    setOpenPopup(true);
+    // setOpenPopup(true);
     setStartTimer(false);
+    Swal.fire({
+        title: "!ممتاز ",
+        text: "أنهيت الاختبار بنجاح",
+        icon: "success",
+        confirmButtonColor: "#32437c",
+        confirmButtonText: "حسنا",
+        width: "400px",
+        showConfirmButton:true,
+    }).then(() => {
+    // Reload the page to restart the game
+    //  window.location.reload();
+    navigate("/Done")
+    }); 
    }}
 }else {
-    setOpenPopup(true); // final score
+    // Swal.fire({
+    //     title: "!ممتاز ",
+    //     text: "أنهيت الاختبار بنجاح",
+    //     icon: "success",
+    //     confirmButtonColor: "#32437c",
+    //     confirmButtonText: "حسنا",
+    //     width: "400px",
+    //     showConfirmButton:true,
+    // }).then(() => {
+    // // Reload the page to restart the game
+    //  window.location.reload();
+    // }); // final score
    }     
 }
 function CalculateScore (){
     
-        if ( num === 63 ){
-        // Correct cards %
-         setWCST64((WCST64/64) * 100);
-         // Time taken to perform the test.
-         var hour = Math.floor((Time / 60 )/ 60);
-         var min = Math.floor((Time / 60)- (hour*60)) ;
-         var sec = Math.floor(Time - (min*60)) ;
-         setConsumedTime (hour + ':' + min + ':' + sec );
-        }else{
-         // Correct cards %
-        setScore(Math.floor((Score/128) * 100 ));
-         // Time taken to perform the test.
-         var hour = Math.floor((Time / 60 )/ 60);
-         var min = Math.floor((Time / 60)- (hour*60)) ;
-         var sec = Math.floor(Time - (min*60)) ;
-         setTotalTime (hour + ':' + min + ':' + sec );
-      }
-    
+    if ( num === 63 ){
+    // Correct cards %
+     setWCST64((WCST64/64) * 100);
+     // Time taken to perform the test.
+     var hour = Math.floor((Time / 60 )/ 60);
+     var min = Math.floor((Time / 60)- (hour*60)) ;
+     var sec = Math.floor(Time - (min*60)) ;
+     setConsumedTime (hour + ':' + min + ':' + sec );
+    }else{
+     // Correct cards %
+    setScore(Math.floor((Score/128) * 100 ));
+     // Time taken to perform the test.
+     var hour = Math.floor((Time / 60 )/ 60);
+     var min = Math.floor((Time / 60)- (hour*60)) ;
+     var sec = Math.floor(Time - (min*60)) ;
+     setTotalTime (hour + ':' + min + ':' + sec );
+  }
+
 }
 
 function Correct(){
-    setTimeout(()=>{
-        setOpenPopupT(false);
-       },2000);
-       setOpenPopupT(true);
-       setScore(Score + 1);
+    // setTimeout(()=>{
+    //     setOpenPopupT(false);
+    //    },2000);
+    //    setOpenPopupT(true);
+    //    setScore(Score + 1);
        if ( num < 63 ){
            setWCST64(WCST64+1)
        }
+        setScore(Score + 1);
+        Swal.fire({
+        title: "!ممتاز ",
+        text: "اختيار صحيح",
+        icon: "success",
+        confirmButtonColor: "#32437c",
+        confirmButtonText: "حسنا",
+        width: "400px",
+        showConfirmButton:true,
+    })
 }
 function Wrong(){
-    setTimeout(()=>{
-        setOpenPopupF(false);
-       },2000);
-       setOpenPopupF(true);
+    // setTimeout(()=>{
+    //     setOpenPopupF(false);
+    //    },2000);
+    //    setOpenPopupF(true);
+    Swal.fire({
+        title: "!حاول مرة اخرة ",
+        text: "اختيار خاطى",
+        icon: 'error',
+        confirmButtonColor: "#32437c",
+        confirmButtonText: "حسنا",
+        width: "400px",
+        showConfirmButton:true,
+    })
 }
 
     return (
         
-       <div>
+       <div className=''>
        <div className="containers">
-     
+       {/* <div className='ProgressBar'>
+         <Line percent={num*0.78} />
+         </div>  */}
           <div className="progressbar">
         <div className="progressbar">
         <div className="progressbar__label">{Math.floor((num*0.78))}%</div>
@@ -401,7 +449,7 @@ function Wrong(){
             </Popup>
             <Popup
                 title={"انتهى التقييم" }
-                // children = {"النقاط : "+ Score  + ' الوقت: ' + ConsumedTime }
+                children = {"النقاط : "+ Score +' الوقت :' + ConsumedTime }
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
             >      

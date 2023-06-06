@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { FaTimes } from 'react-icons/fa';
-
 import {
   Dialog,
   DialogContent,
@@ -12,23 +10,23 @@ import {
 // the commented part is used as close button incase you wanted to change the design
 function Videopopup({ title, children, openPopup, handleClose}) {
     return (
-      <Dialog style={{textAlign:"center",margin:"auto",backgroundColor:'whait', width:"auto",height:"auto",position: 'absolute', }} open={openPopup} maxWidth="md">
+      <Dialog style={{textAlign:"center",margin:"auto", width:"auto",height:"auto",position: 'absolute', }} open={openPopup} maxWidth="md" className='colorbg'>
           <DialogTitle >
-              <div style={{ display: 'flex', backgroundColor:'white' }}>
+              <div style={{ display: 'flex' }}>
                   <Typography variant="h4" component="div" style={{ flexGrow: 1,}} >
                       الفيديو التوضيحى
                   </Typography>
-                  <FaTimes
+                  {/* <FaTimes
                     className="close-tag black"
                     onClick={handleClose}
-                    />
+                    /> */}
               </div>
           </DialogTitle>
           <DialogContent style={{margin:"20px"}}>
               {children}
-            {/* <div className='video-button'>
+            <div className='video-button'>
                 <button className="btnt2" onClick={handleClose}>اغلاق</button>
-            </div>  */}
+            </div> 
           </DialogContent>
       </Dialog>
   )

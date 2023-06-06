@@ -3,7 +3,7 @@ import {BsStopwatch} from "react-icons/bs"
 import styled from "styled-components";
 
 const TimerWrapper = styled.div`
-  margin-top: 5vh;
+  margin-top: 40%;
   width: 400px;
   margin-left: auto;
   margin-right: auto;

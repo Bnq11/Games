@@ -3,7 +3,9 @@ import './caard.css';
 import { useState } from 'react';
 
 import Fade from 'react-reveal';
+import Swal from 'sweetalert2';
 
+import moneybagImage from '../../Ultimatum/moneybag.png';
 import Popup from '../../VSGame/Popup/Popup';
 import Caard from './Caard';
 
@@ -47,10 +49,10 @@ function Caards(){
     const [num, setnum] = useState(1);
     const [Score, setScore] = useState(0);
     const [Total, setTotal] = useState(0);
-    const [openPopup, setOpenPopup] = useState(false); 
-    const [Risk, setRisk] = useState(0);
+    const [openPopup, setOpenPopup] = useState(false);
     const [loss, setLoss] = useState(0);
-    
+    const [Risk, setRisk] = useState(0);
+
 
 
     function Update(){
@@ -73,28 +75,58 @@ function Caards(){
                     items[id].stat = "active"
                     setItems([...items])
                     setnum(num +1 );
+                    handleButtonClickfailure(Score)
                     setLoss(loss+Score);
                     setTotal(Total - Score)
+                    setRisk(Risk+1)
                     setTimeout(()=>{
                     Update();
                     if (num === 30)
-                    {setOpenPopup(true)}
-                    }, 1000)
+                    {
+                      CalculateScore ();
+                      setOpenPopup(true)}
+                    }, 3000)
                     setScore(0);
                 }
+    }
+    function handleButtonClickfailure(totalAmount) {
+      Swal.fire({
+      title: '!حظ موفق',
+      text:  `لقد خسرت ${totalAmount} ريال`,
+      background: '#dadada'
+      }) 
     }
 function Clicked(){
         setTotal (Total + Score)
         setnum(num +1 );
+        Swal.fire({
+        title: '!مبروك',
+        text:  `لقد ربحت ${Score} ريال`,
+        imageUrl: moneybagImage,
+        imageWidth: 200,
+        imageHeight: 200,
+        imageAlt: 'Custom image',
+        background: '#dadada', // Set the background to a semi-transparent black color
+        })
         Update();
         setScore(0);
-        if (num === 30)
-        {
-          CalculateScore ();
-          setOpenPopup(true);
+        if (num === 30){
+          Swal.fire({
+            title: "!ممتاز ",
+            text: "أنهيت الاختبار بنجاح",
+            icon: "success",
+            confirmButtonColor: "#32437c",
+            confirmButtonText: "حسنا",
+            width: "400px",
+            showConfirmButton:true,
+          }).then(() => {
+            // Reload the page to restart the game
+            window.location.reload();
+          });
+  // }
         }
+        // {setOpenPopup(true)}
 }
-
 function CalculateScore (){
   var RiskRatio = ( Risk / 30 )*100 ;
   var gain = Total;
@@ -103,49 +135,65 @@ function CalculateScore (){
 //===========================================
 
     return (
-       <div>
+       <div className='colorcover'>
         <div className="progressbar">
         <div className="progressbar">
-          <div className="progressbar__label">{Math.floor((num*3.3))}%</div>
-        <progress className="progressbar__fill" value={num} max={30} />
+          <div className="progressbar__label">{Math.floor(((num-1)*3.333))}%</div>
+        <progress className="progressbar__fill" value={(num-1)} max={30} />
     </div>
       </div>
 
-      <div className='cash-container shadow'>
-        <div className="amount">
-          <div className="icon-cash">
-          <div className="cash"  style={{ 
-            transition: "background-color 1s ease-in-out" 
-            }}>
-            <h1 className="cash-name">مجموع الربح </h1>
-            <h1 className="cash-name">:</h1>
-            <h1 className="cash-amount">
-              {" "}
-              {Total.toFixed(2)}{" "}
-            </h1>
-            <h1 className="cash-name"> ريال   <br/> </h1>
-            </div>
-          </div>
-        </div>
 
-        <div className="amount">
+      <div className='cash-containerl shadow'>
+        <div className='amount-containerc'>
+
+        <div className="amount1">
+        <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_it8yjgkh.json"  background="transparent"  speed="1"  style={{ width: '100px', height: '60px' }} autoplay></lottie-player>
+
           <div className="icon-cash">
           <div className="cash"  style={{ 
             // backgroundColor: colors[colorIndex], 
             transition: "background-color 1s ease-in-out" 
             }}>
-            <h1 className="cash-name">مجموع الجولة {num} </h1>
-            <h1 className="cash-name">:</h1>
-            <h1 className="cash-amount">
+            <h4 className="cash-name">مجموع الربح </h4>
+            <h4 className="cash-name">:</h4>
+            <h4 className="cash-amount">
               {" "}
-              {Score.toFixed(2)}{" "}
-            </h1>
-            <h1 className="cash-name"> ريال </h1>
+              {Total}{" "}
+            </h4>
+            <h4 className="cash-name"> ريال </h4>
             
            </div>
           </div>
         </div>
-      </div>
+        </div>
+        </div>
+        <div className='cash-container shadow'>
+                
+
+                <div className='amount-containerc'>
+                  
+                <div className="amount1">
+                <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_it8yjgkh.json"  background="transparent"  speed="1"  style={{ width: '0px', height: '60px' }} ></lottie-player>
+                  <div className="icon-cash">
+                  <div className="cash"  style={{ 
+                    transition: "background-color 1s ease-in-out" 
+                    }}>
+                    <h4 className="cash-name">مجموع الجولة الحالي</h4>
+                    <h4 className="cash-name">:</h4>
+                    <h4 className="cash-amount">
+                      {" "}
+                      {Score}{" "}
+                    </h4> 
+                    <h6 className="cash-name"> ريال   <br/> </h6>
+                    </div>
+                  </div>
+                </div>
+                
+                </div>
+        
+              </div>
+
 
       <Fade left >
       <div className='button-justifyer50 '>
@@ -165,13 +213,13 @@ function CalculateScore (){
                 <Caard key={index} item={item} id={index} handleClick={handleClick} className="mx-auto card-adds"/>
             )) }
         </div>
-        <Popup
+        {/* <Popup
                 title={"انتهى التقييم" }
-                // children = {"النقاط : "+ Score}
+                children = {"النقاط : "+ Score}
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
             >      
-            </Popup>
+            </Popup> */}
         </div>
     )
 

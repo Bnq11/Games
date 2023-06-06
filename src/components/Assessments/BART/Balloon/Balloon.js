@@ -1,16 +1,19 @@
 // import { Link } from "react-router-dom"
 import './Balloon.css';
 import 'react-toastify/dist/ReactToastify.css';
-
+import {useSearchParams} from 'react-router-dom';
 import React, { useState } from 'react';
-
+import { addScore } from '../../../../API';
 import {
   toast,
   ToastContainer,
 } from 'react-toastify';
+import Swal from 'sweetalert2';
 
+import moneybagImage from '../../Ultimatum/moneybag.png';
 import Popup from '../../VSGame/Popup/Popup';
 import Pop from '../assets/Pop.mp3';
+import {useNavigate} from "react-router-dom"
 
 function Balloons(){
     const [items] = useState([
@@ -59,9 +62,14 @@ function Balloons(){
     const [attempts, setAttempts] = useState (0);
     const [Risk, setRisk]=useState(0) 
     const [RiskRatio, setRiskRatio]=useState(0)
-    const [loss, setLoss]=useState(0)
     // Risk Taking Ratio will be used in the last step
     const [LastBalloon, setLastBalloon]=useState(0)
+    const navigate = useNavigate();
+    const [loss, setLoss]=useState(0);
+
+    const [searchParams,setSearchParams] = useSearchParams();
+    const query = searchParams.get("serial_number");
+    const query2 = searchParams.get("assessment_id");
 
     const notify = () => toast(`مبروك لقد ربحت  ${Score}`);
 
@@ -105,6 +113,7 @@ function Balloons(){
             setOpenPopup(true)
             }
             setLoss(loss + Score);
+            handleButtonClickfailure(Score)
             setScore(0);
             setAttempts(1)
             setBlueArray([
@@ -121,7 +130,7 @@ function Balloons(){
       }else{
         setCount(Count+0.15); //===============???????
         console.log(Count*30,Count*50);
-        setScore(Score + 0.05);
+        setScore(Score + 5);
         setAttempts(attempts+1)
       }
     
@@ -170,6 +179,7 @@ function Balloons(){
             setOpenPopup(true)
             }
             setLoss(loss + Score);
+            handleButtonClickfailure(Score)
             setScore(0);
             setAttempts(1)
             setOrangeArray([
@@ -180,7 +190,7 @@ function Balloons(){
       }else{
         setCount(Count+0.15);
         console.log(Count*30,Count*50);
-        setScore(Score + 0.05);
+        setScore(Score + 5);
         setAttempts(attempts+1)
       }}
       
@@ -226,6 +236,7 @@ function Balloons(){
             setOpenPopup(true)
             }
             setLoss(loss + Score);
+            handleButtonClickfailure(Score)
             setScore(0);
             setAttempts(1);
             setYellowArray([
@@ -237,7 +248,7 @@ function Balloons(){
       }else{
         setCount(Count+0.15);
         console.log(Count*30,Count*50);
-        setScore(Score + 0.05);
+        setScore(Score + 5);
         setAttempts(attempts+1)
       }
     }
@@ -248,7 +259,7 @@ function Balloons(){
         
     }
 
-function collect(){
+function collect(score){
     setLastBalloon(Score)
     setTotal(Total+Score);
     console.log(Score)
@@ -256,7 +267,15 @@ function collect(){
     setAttempts(1) 
     setCount(1)
     //
-    notify()
+    Swal.fire({
+    title: '!مبروك',
+    text:  `لقد ربحت ${Score} ريال`,
+    imageUrl: moneybagImage,
+    imageWidth: 200,
+    imageHeight: 200,
+    imageAlt: 'Custom image',
+    background: '#dadada', // Set the background to a semi-transparent black color
+    })
     //
     setScore(0) 
     setIndex(Math.floor(Math.floor((Math.random()*3)))) //New Balloon
@@ -277,27 +296,78 @@ function collect(){
         121,123,124,125,126,127,128
     ])
     if (num === 15)
-    { 
-      CalculateScore ()
-      setOpenPopup(true)
+    {
+      setRiskRatio( (Risk / 15)*100 );
+      Swal.fire({
+        title: "!ممتاز ",
+        text: "أنهيت الاختبار بنجاح",
+        icon: "success",
+        confirmButtonColor: "#32437c",
+        confirmButtonText: "حسنا",
+        width: "400px",
+        showConfirmButton:true,
+    }).then(() => {
+    // Reload the page to restart the game
+    //  window.location.reload();
+    navigate("/Done")
+
+    }); // final score
      }
 }
 
-function CalculateScore (){
+
+function handleButtonClickfailure(totalAmount) {
+  // Swal.fire({
+  // title: '!حظ موفق',
+  // text:  `لقد خسرت ${totalAmount} ريال`,
+  // background: '#dadada'
+  // }) 
+}
+async function CalculateScore (){
   setRiskRatio( (Risk / 15)*100 );
   var gain = Total;
-  var Loss = loss; 
+  var Loss = loss;
+
+  const requestBody = {
+    serial_number: query,
+    assessment_id: query2,
+    type: 'risk',
+    risk: [
+      { risk_ratio: RiskRatio, gain: gain, loss: Loss }
+    ]
+  };
+
+  console.log("305",requestBody)
+  try{
+    const res = await addScore(requestBody)
+
+    if(res.status ===200){
+      console.log('success')
+      //TODO: navigate to last page here 
+
+    }
+  }
+  catch(e){
+   console.log(e)
+   //TODO: show an error alert here 
+  }
+
 }
 return (
     <div className=" "> 
+    {/* <div className='Progress'>
+        <Line percent={num*6.66} />
+    </div>  */}
      <div className="progressbar">
         <div className="progressbar">
-          <div className="progressbar__label">{Math.floor((num*6.66))}%</div>
-        <progress className="progressbar__fill" value={num} max={15} />
+          <div className="progressbar__label">{Math.floor(((num-1)*6.66))}%</div>
+        <progress className="progressbar__fill" value={num-1} max={15} />
     </div>
       </div>
       <div className='cash-container shadow '>
 
+        <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_it8yjgkh.json"  background="transparent"  speed="1"  style={{ width: '100px', height: '80px' }}   autoplay></lottie-player>
+        <div className='amount-container'>
         <div className="amount">
           <div className="icon-cash">
           <div className="cash"  style={{ 
@@ -307,7 +377,7 @@ return (
             <h1 className="cash-name">:</h1>
             <h1 className="cash-amount">
               {" "}
-              {Total.toFixed(2)}{" "}
+              {Total}{" "}
             </h1>
             <h1 className="cash-name"> ريال   <br/> </h1>
             </div>
@@ -315,7 +385,7 @@ return (
         </div>
 
 
-        <div className="amount">
+        {/* <div className="amount">
           <div className="icon-cash">
           <div className="cash"  style={{ 
             // backgroundColor: colors[colorIndex], 
@@ -331,7 +401,9 @@ return (
             
            </div>
           </div>
+        </div> */}
         </div>
+        
 
       </div>
 
@@ -348,20 +420,20 @@ return (
       { pumpT && <center><img src= {animation[index].img} alt="" style={ {display: 'flex', width: +  Count*30 + 'px', height: +  Count*50 + 'px'} } /></center> }
     </div>
     <h1 className="cash-amount">
-              {" "}
-              {Score.toFixed(2)}{" "}
+              {" ا "}
+              {Score}{" ريال "}
             </h1>
     <div className="btnContainer">
       <button className="tbutton tbuttonColorCyan" onClick={collect}> جمع </button>
       <button className="tbutton tbuttonColorBlue"  onClick={ handleClick } > زيادة الحجم </button>
     </div>
-             <Popup
+             {/* <Popup
                 title={"انتهى التقييم" }
-                // children= {'Risk Taking Ratio: %'+RiskRatio.toFixed(2)}
+                children= {'Risk Taking Ratio: %'+RiskRatio.toFixed(2)}
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
             >      
-            </Popup>
+            </Popup> */}
     </div>
 )
 }export default Balloons

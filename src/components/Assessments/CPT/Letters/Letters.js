@@ -9,6 +9,9 @@ import {
   toast,
   ToastContainer,
 } from 'react-toastify';
+import {useNavigate} from "react-router-dom"
+
+import Swal from 'sweetalert2';
 
 import Background from '../../../Background/Background';
 // import 'bootstrap/dist/css/bootstrap.css';
@@ -26,16 +29,17 @@ function Letters(){
 // progress: undefined,
 // theme: "colored",
 // });
-// const error = ()=> toast.error('اجابة خاطئة', {
-// position: "bottom-right",
-// autoClose: 2000,
-// hideProgressBar: true,
-// closeOnClick: true,
-// pauseOnHover: true,
-// draggable: true,
-// progress: undefined,
-// theme: "colored",
-// });
+const error = ()=> toast.error('اجابة خاطئة', {
+position: "bottom-right",
+autoClose: 2000,
+hideProgressBar: true,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "colored",
+});
+const navigate = useNavigate();
 
 const [currentLetter, setCurrentLetter] = useState('');
 const [count, setCount] = useState(0);
@@ -67,7 +71,7 @@ const [isRunning, setIsRunning] = useState(true);
 
 const [showEndScreen, setShowEndScreen] = useState({
   show: false,
-  // message: "Happy coding in 2023!",
+  // message: 
   //======================================
 });
 
@@ -116,8 +120,22 @@ useEffect(() => {
 }, []);
 
 const handleResponse = (Letter) => {
-  if (Time > 840){
-     setOpenPopup(true); /////////////// Finish Game
+  if (Time > 1092){
+    //1092
+    Swal.fire({
+      title: "!ممتاز ",
+      text: "أنهيت الاختبار بنجاح",
+      icon: "success",
+      confirmButtonColor: "#32437c",
+      confirmButtonText: "حسنا",
+      width: "400px",
+      showConfirmButton:true,
+  }).then(() => {
+  // Reload the page to restart the game
+  //  window.location.reload();
+  navigate("/Done")
+})
+    //  setOpenPopup(true); /////////////// Finish Game
      CalculateScore ();
   } 
   
@@ -131,7 +149,7 @@ const handleResponse = (Letter) => {
   } else {
     if (  Letter === 'X' && oneAns === 1) {
     setIncorrectCount(incorrectCount + 1);
-    // error()
+    error()
     console.log('Incorrect. Response time:', responseDelay);
     }
   }
@@ -172,12 +190,16 @@ return (
   <div className="container5">
     <div className="row mt-5">
       <div className="col-12 text-center">
+      <br/><br/>
         <h1 className='letter'>{currentLetter}</h1>
-        <button className="btn1 btn-primary mr-2" onClick={() =>  handleResponse(currentLetter)}>هدف</button>
+        <br/><br/> <br/><br/> <br/><br/> <br/><br/>
+        <button className='btnt2 ' onClick={()=>handleResponse(currentLetter)}>هدف</button>
       </div>
     </div>
-    <div className='time-card shadow'>
-      <h1 className='timer'> 
+    <div 
+    className='time-card '
+    >
+      {/* <h1 className='timer'>  */}
      <Timer
         milliseconds={milliseconds}
         seconds={seconds}
@@ -188,21 +210,21 @@ return (
         // changeHours={changeHours}
       />
       {/* الوقت <br/> {(Time / 60).toFixed(0) } : {(Time - ((Time / 60)*60)).toFixed(0)} */}
-      </h1> 
+      {/* </h1>  */}
     </div>
     {showEndScreen.show && (
-       <h1 className="title text-light">
-        {/* {showEndScreen.message} */}
-       </h1>
+        <h1 className="title text-light">
+         {/* {showEndScreen.message} */}
+        </h1>
     )}
     {/* <Background/> */}
-    <Popup
+    {/* <Popup
       title={"انتهى التقييم" }
       // children = {"النقاط : "+ Score}
       openPopup={openPopup}
       setOpenPopup={setOpenPopup}
     >      
-    </Popup>
+    </Popup> */}
   </div>
   </>
 );

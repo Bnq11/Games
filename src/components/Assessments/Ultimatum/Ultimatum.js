@@ -5,15 +5,18 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import {useNavigate} from "react-router-dom"
+
 import { Container } from 'react-bootstrap';
-import { TbClick } from 'react-icons/tb';
 import Fade from 'react-reveal';
 import { ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2';
 
+import Background from '../../Background/Background';
+import Videopopup from '../../Videopopup';
+import demo from '../BART/assets/BRAT.mp4';
 import moneybagImage from './moneybag.png';
-
+import Done from './../Done';
+import {useNavigate} from "react-router-dom"
 function Ultimatum() {
   const [scenarios, setScenarios] = useState([]);
   const [cash, setCash] = useState(0);
@@ -24,13 +27,21 @@ function Ultimatum() {
   const [totalAmount, setTotalAmount] = useState(0);
   const [colorIndex, setColorIndex] = useState(0);
   const colors = ["rgba(255, 255, 255, 0.75)", "rgb(200,200,219, 0.75)"];
-  // console.log(count);
-  // console.log(scenarios);
-  // console.log(totalAmount);
-  const navigate = useNavigate();
-  const [report, setReport] = useState('');
-  const [info, setInfo] = useState('');
-  
+    const [openPopup, setOpenPopup] = useState(false);
+    const [card1,setCard1] = useState(false)
+    const [card2,setCard2] = useState(false)
+    const [card3,setCard3] = useState(false)
+    const navigate = useNavigate();
+    const [report, setReport] = useState('');
+    const [info, setInfo] = useState('');
+    function handleOpen(){
+        setOpenPopup(true)
+    }
+
+    function handleClose(){
+        setOpenPopup(false)
+    } 
+
 
   function handleButtonClicksuccess(totalAmount) {
     Swal.fire({
@@ -46,7 +57,7 @@ function Ultimatum() {
 
   function handleButtonClickfailure(totalAmount) {
     Swal.fire({
-    title: '!حظ موفق',
+    title: '!حظ أوفر',
     text:  `لقد خسرت ${totalAmount} ريال`,
     background: '#dadada'
     }) 
@@ -60,29 +71,29 @@ function Ultimatum() {
     const proposerSplit = fairness / 10; // percentage of offer amount that the proposer will receive if the offer is accepted
     const proposerAmount = Math.floor(offerAmount * proposerSplit); // calculate proposer split amount
     const recipientAmount = offerAmount - proposerAmount; 
+
     const splitAmount = proposerAmount;
     const totalAmount = proposerAmount;
     const Info='\n'+"المبلغ المعروض: "+ offerAmount +"\n المبلغ الحاصل عليه: "+proposerAmount+"\n المبلغ المعطى: "+ recipientAmount;
-   
     const description = (
         <div class="message-container">
-          <Fade left>
-            {/* <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_KaGQcx3h4i.json"  background="transparent"  speed="1"  style={{ width: '100%', height: '250px' }}  loop  autoplay></lottie-player> */}
-            <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_LkON0pK1XM.json"  background="transparent"  speed="0.4"  style={{ width: '100%', height: '250px' }}  loop  autoplay></lottie-player>
-          </Fade>
           <div class="message">
             <div class="offer-amount margintopbottom">
                 <span class="label">المبلغ المعروض</span>
                 <span class="value">{offerAmount}</span>
                 <span class="label">ريال</span>
             </div>
+            <Fade >
+            {/* <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_KaGQcx3h4i.json"  background="transparent"  speed="1"  style={{ width: '100%', height: '250px' }}  loop  autoplay></lottie-player> */}
+            <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_LkON0pK1XM.json"  background="transparent"  speed="0.4"  style={{ width: '100%', height: '250px' }}  loop  autoplay></lottie-player>
+          </Fade>
             <div class="total-amount margintopbottom">
               <span class="label">ستحصل على</span>
               <span class="value">{proposerAmount}</span>
               <span class="label">ريال</span>
             </div>
             <div class="split-amount margintopbottom">
-              <span class="label">سيحصل الشخص الآخر على</span>
+              <span class="label">سيحصل محمد على</span>
               <span class="value">{recipientAmount}</span>
               <span class="label">ريال</span>
             </div>
@@ -90,7 +101,7 @@ function Ultimatum() {
         </div>
     );
 
-    return { offerAmount, splitAmount, description, totalAmount, Info };
+    return { offerAmount, splitAmount, description, totalAmount , Info};
   }
 
   function generateScenarios(numScenarios) {
@@ -102,14 +113,13 @@ function Ultimatum() {
       const id = i + 1; // generate unique identifier
 
       newScenarios.push({ id, fairness, ...proposal }); // add scenario to array
-
     }
 
     setScenarios(newScenarios); // update state with new scenarios
   }
 
   function getScenario() {
-    // console.log(scenarios[count]);//print current object
+    console.log(scenarios[count]);//print current object
     const currentScenario = scenarios[count];
     const TotalAmount = currentScenario ? currentScenario.totalAmount : 0;
     return scenarios[count]?.description;
@@ -129,14 +139,13 @@ function Ultimatum() {
       setAccept((prevAccept) => prevAccept + 1);
       setReport(report+'\n المحاولة'+(count+1)+": تم قبولها"+scenarios[count]?.Info)
       console.log("accept",accept);
-      console.log(report)
+      console.log(report);
       handleButtonClicksuccess(scenarios[count]?.totalAmount,)
-      console.log(nextvalue)
     }else{
         setReject((prevReject) => prevReject + 1);
         setReport(report+'\n المحاولة'+(count+1)+": تم رفضها"+scenarios[count]?.Info)
-        console.log("reject",reject)
-        console.log(report)
+        console.log("reject",reject);
+        console.log(report);
         handleButtonClickfailure(scenarios[count]?.totalAmount)
         console.log(nextvalue)
     }
@@ -154,6 +163,7 @@ function Ultimatum() {
       width: "400px",
     }).then(() => {
       // Reload the page to restart the game
+      // window.location.reload();
       navigate("/Done")
     });
   }
@@ -179,90 +189,62 @@ useEffect(() => {
     return () => clearInterval(intervalId);
   }, []);
   function CalculateScore (){
-   var FinalReport = report;
-   
+    var FinalReport = report;
   }
   return Start === false ? (
-    <Container fluid className="first-container">
-      <ul class="circles">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-      <div className="alert-start">
-        <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_NaBiczarjA.json"  background="transparent"  speed="1"  style={{ width: '300px', height: '250px' }}  loop  autoplay></lottie-player>
-        <div className="alert-message">
-          {/* TODO: اكتب وصف */}
-          <div class="cardu cardfix">
-          <Fade right>
-            <h3 className="description">
-              في هذه اللعبة، عدد من العروض ستقدم لك. خلال كل عرض، سيتلقى شخص آخر
-              نسبة من المبلغ{" "}
-            </h3>
-          </Fade>
-          </div>
+        <div className="Ready1">
 
-          <div class="cardu cardfix">
-          <Fade right>
-              <h3 className="description">
-               نسبة المبلغ المعروض تختلف من كل عرض لاخر
-              </h3>
-          </Fade>
-          </div>
-          <div class="cardu cardfix">
-          <Fade right>
-            <h3 className="description">
-              يمكنك اختيار
-              <span className="positive"> قبول </span>
-              أو <span className="negative"> رفض </span> العرض
-            </h3>
-          </Fade>
-          </div>
-          <div class="cardu cardfix">
-          <Fade right>
-              <h1 className="description">
-                عند
-                <span className="positive"> قبول </span>
-                العرض سيضاف المبلغ المعروض الى حسابك، عند{" "}
-                <span className="negative"> الرفض </span> كلاكما لن يحصل على المبلغ
-              </h1>
-          </Fade>
-          </div>
-          <div class="cardu cardfix">
-          <Fade right>
-            <h1 className="description">
-              عليك اختيار العروض الاكثر عدلًا مع الابقاء في عين الاعتبار أن هدفك
-              هو زيادة الربح
-            </h1>
-          </Fade>
-          </div>
-          <div class="cardu cardfix">
-          <Fade right>
-            <h1 className="description-start">
-              للبدأ اضغط ابدأ اللعب
-              <TbClick size={30} color="black" />
-            </h1>
-          </Fade>
-          </div>
-          </div>
+            <h1 className='title'> مهمة  </h1> 
 
-      </div>
-      {/* fourth section */}
-      <div className="card-deck">
-        <div className="cardu startbutton" onClick={() => handleStartClick()}>
-          <Fade right>
-            <h3 className="margin0">ابدأ اللعب</h3>
-          </Fade>
+            <div className="tips">
+                <div className='headersandbutton my-1'>
+                <h3 className='tips-header'> 
+                .سيُقدم لك ١٥ بالونًا ، واحدًا تلو الآخر.
+                يمكنك النقر فوق الزر المسمى "زيادة" لزيادة حجم البالون
+                </h3>
+                <button className='btnt m-0' onClick={()=>setCard1(true)}>التالي</button>
+                </div>
+                {card1 &&
+                <div className='headersandbutton my-1' >
+                <h3 className='tips-header'> 
+                .ستجمع 5 هللات في بنك مؤقت لكل زيادة. سيظهر لك المبلغ المتراكم في مصرفك المؤقت
+                
+                في أي وقت ، يمكنك التوقف عن ضخ البالون والنقر على الزر المسمى "جمع". 
+                سيؤدي النقر فوق هذا الزر إلى بدء تشغيل البالون التالي
+                </h3>
+                <button className='btnt m-0' onClick={()=>setCard2(true)}>التالي</button>
+                </div>
+                }
+                {card2 &&
+                <div className='headersandbutton my-1'>
+                <h3 className='tips-header'> 
+                ." وتحويل الأموال المتراكمة من مصرفك المؤقت إلى مصرفك الدائم المسمى "إجمالي الأرباح
+                .ولكن كن على دراية بأن البالون سينفجر في مرحلة ما، تختلف نقطة الانفجار عبر البالونات
+                .إذا انفجر البالون قبل النقر فوق "جمع" ، فإنك تنتقل إلى البالون التالي وتفقد جميع الأموال الموجودة فيه
+                </h3>
+                <button className='btnt m-0' onClick={()=>setCard3(true)}>التالي</button>
+                </div>
+                }
+            </div>
+
+            <Videopopup
+                title={"انتهى التقييم" }
+                children= {
+                <video autoPlay loop controls width="640" height="480" style={{zIndex:1,borderRadius:"25px"}}>
+                    <source src={demo} type='video/webm' ></source>
+                </video>}
+                openPopup={openPopup}
+                handleClose={handleClose}
+            />  
+            { card3 &&
+            <div className='button-justifyer'>
+                <button to="/Balloons" className="btnt"  onClick={() => handleStartClick()}> ابدأ</button>
+                <button className="btnt2" onClick={handleOpen}>فيديو توضيحى</button>
+            </div>
+            }
+   
+            <Background height="100%"/>
         </div>
-      </div>
-    </Container>
   ) : (
     <Container fluid className="first-container">
       <ul class="circles">
@@ -289,15 +271,15 @@ useEffect(() => {
       <Fade right>
         <div className="amount">
           <div className="icon-cash">
-          <div className="cash"  style={{ backgroundColor: colors[colorIndex], transition: "background-color 1s ease-in-out" }}>
-            <h3 className="cash-name">مجموع الربح الان</h3>
-            <h3 className="cash-name">:</h3>
-            <h3 className="cash-amount">
+          <div className="cash1"  style={{ backgroundColor: colors[colorIndex], transition: "background-color 1s ease-in-out" }}>
+            <h1 className="cash-name">مجموع الربح الان</h1>
+            <h1 className="cash-name">:</h1>
+            <h1 className="cash-amount">
               {" "}
               {cash}{" "}
-            </h3>
-            <h3 className="cash-name"> ريال </h3>
-            <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_it8yjgkh.json"  background="transparent"  speed="1"  style={{ width: '100px', height: '80px' }}  loop  autoplay></lottie-player>
+            </h1>
+            <h1 className="cash-name"> ريال </h1>
+            <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_it8yjgkh.json"  background="transparent"  speed="1"  style={{ width: '100px', height: '80px' }} autoplay></lottie-player>
             {/* <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_pk0smbuq.json"  background="transparent"  speed="1"  style={{ width: '100px', height: '80px' }}  loop  autoplay></lottie-player> */}
             </div>
           </div>
@@ -310,13 +292,13 @@ useEffect(() => {
         <Fade left key={count}>
           {/* <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_L5FmEqdLn6.json"  background="transparent"  speed="0.7"  style={{ width: '150px', height: '150px', margin:'auto' }}  loop autoplay></lottie-player> */}
           <lottie-player key={count} src="https://assets10.lottiefiles.com/packages/lf20_j3yti031.json"  background="transparent"  speed="0.3"  style={{ width: '170px', height: '170px', margin:'auto' }}     autoplay></lottie-player>
-          <h3 className="marginbottom">رفض</h3>
+          <h1 className="marginbottom">رفض</h1>
         </Fade>
       </div>
         <div className="alert-body">
             <Fade up key={count}>
               <div className="alert-message">
-                <h3 className="scenario">{getScenario()}</h3>
+                <h1 className="scenario">{getScenario()}</h1>
               </div>
             </Fade>
         </div>
@@ -324,7 +306,8 @@ useEffect(() => {
           <Fade right key={count}>
             {/* <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_Vs49OV.json"  background="transparent"  speed="0.7"  style={{ width: '150px', height: '150px',margin:'auto' }}  loop  autoplay></lottie-player> */}
             <lottie-player key={count} src="https://assets6.lottiefiles.com/packages/lf20_kenw4cok.json"  background="transparent"  speed="0.3"   style={{ width: '150px', height: '150px',margin:'auto' }} autoplay></lottie-player>
-            <h3 className="marginbottom">قبول</h3>
+            <h1 className="marginbottom">قبول</h1>
+
           </Fade>
         </div>
       </div>
