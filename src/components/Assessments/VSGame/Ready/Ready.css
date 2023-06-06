@@ -19,13 +19,32 @@ h1{
 .btn {
   margin-top: 1%;
   z-index: 1;
-  width: 7%;
+  width: 15%;
   background-color: rgba(255, 255, 255, 0.75);
   border-radius: 15px;
   border: 3px solid #32437c;
   font-size: 26px;
   font-weight: 700;
 }
+.btntrvs {
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 15px;
+  border: 3px solid #32437c;
+  margin-top: 1%;
+  text-align: center;
+  font-size: 26px;
+  width: 20%;
+  color: #000;
+  z-index: 1;
+  cursor: pointer;
+}
+.btntrvs:hover{
+  background-color: rgb(200, 200, 219, 0.90);
+  border-radius: 15px;
+  border: 3px solid rgba(255, 255, 255);
+  color: rgb(255, 255, 255)
+} 
 
 .btn:hover{
   background-color: rgb(200, 200, 219, 0.90);
@@ -65,5 +84,13 @@ h1{
   padding: 10px;
   border: 1px black solid;
   border-radius: 30px;
-  width: 100%;
+  width: 60%;
+  margin-left: 20%;
+}
+
+.containerinf{
+  display: flex;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  margin-left: 15%;
 }
