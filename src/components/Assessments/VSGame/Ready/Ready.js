@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import Background from '../../../Background/Background';
 import Videopopup from '../../../Videopopup';
 import demo from '../../BART/assets/BRAT.mp4';
-
 import Card from '../Card/Card';
 
 function Ready(){
@@ -31,12 +30,12 @@ function Ready(){
 
     return (
         
-        <div className="">
+        <div className="" style={{height:'100vh'}}>
 
             <h1 className='title'> مهمة  فرز البطاقات </h1> 
 
-            <div className="">
-            {cardin &&    <div className='headersandbutton my-1'>
+            <div className="" style={{height:'80%',display:"flex"}}>
+            {cardin &&    <div style={{height:"fit-content"}} className='headersandbutton my-auto'>
                 <h3 className='tips-header'> 
                 في هذه اللعبة، مهمتك بسيطة!
 
@@ -49,12 +48,17 @@ function Ready(){
                 }
                 
              </div>
+             <div className='space w-100'>
                 <button className='btntrvs m-0' onClick={()=>{setCard1(true);
                setcardin(() => false);}}>
                     {'< '} التالي</button>
+                <button className='btntrvs m-0' onClick={()=>{setCard1(true);
+               setcardin(() => false);}}>
+                    {'> '} السابق</button>
+            </div>
                 </div>}
                 {card1 &&
-                <div className='headersandbutton my-1'>
+                <div style={{height:"fit-content"}} className='headersandbutton my-auto'>
                 <h3 className='tips-header'> 
                   
 اذا فرزت البطاقة بشكل صحيح، سيظهر كلمة "صحيح". اذا فرزتها بشكل خاطئ سيظهر "خاطئ"

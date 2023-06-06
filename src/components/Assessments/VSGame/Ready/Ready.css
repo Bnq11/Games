@@ -92,5 +92,10 @@ h1{
   display: flex;
   margin-bottom: 5%;
   margin-top: 5%;
-  margin-left: 15%;
+  justify-content: space-evenly;
+}
+
+.space{
+  display: flex;
+  justify-content: space-between;
 }
