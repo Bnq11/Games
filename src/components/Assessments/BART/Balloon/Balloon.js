@@ -3,6 +3,7 @@ import './Balloon.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 import React, { useState } from 'react';
+import {useSearchParams} from 'react-router-dom';
 
 import {
   toast,
@@ -11,6 +12,7 @@ import {
 
 import Popup from '../../VSGame/Popup/Popup';
 import Pop from '../assets/Pop.mp3';
+import { addScore } from '../../../../API';
 
 function Balloons(){
     const [items] = useState([
@@ -60,6 +62,9 @@ function Balloons(){
     const [Risk, setRisk]=useState(0) 
     const [RiskRatio, setRiskRatio]=useState(0)
     const [loss, setLoss]=useState(0)
+    const [searchParams,setSearchParams] = useSearchParams();
+    const query = searchParams.get("serial_number");
+    const query2 = searchParams.get("assessment_id");
     // Risk Taking Ratio will be used in the last step
     const [LastBalloon, setLastBalloon]=useState(0)
 
@@ -283,10 +288,35 @@ function collect(){
      }
 }
 
-function CalculateScore (){
+async function CalculateScore (){
   setRiskRatio( (Risk / 15)*100 );
   var gain = Total;
-  var Loss = loss; 
+  var Loss = loss;
+
+  const requestBody = {
+    serial_number: query,
+    assessment_id: query2,
+    type: 'risk',
+    risk: [
+      { risk_ratio: RiskRatio, gain: gain, loss: Loss }
+    ]
+  };
+
+  console.log("305",requestBody)
+  try{
+    const res = await addScore(requestBody)
+
+    if(res.status ===200){
+      console.log('success')
+      //TODO: navigate to last page here 
+
+    }
+  }
+  catch(e){
+   console.log(e)
+   //TODO: show an error alert here 
+  }
+
 }
 return (
     <div className=" "> 

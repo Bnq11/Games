@@ -4,7 +4,7 @@ import './ReadyT.css';
 import React, { useState } from 'react';
 
 // import { DefaultPlayer as Video } from 'react-html5video/dist';
-import { Link } from 'react-router-dom';
+import { useSearchParams,useNavigate } from 'react-router-dom';
 
 import Background from '../../../Background/Background';
 import Videopopup from '../../../Videopopup';
@@ -12,6 +12,10 @@ import demo from '../assets/BRAT.mp4';
 
 function ReadyT(){
     const [openPopup, setOpenPopup] = useState(false);
+    const [searchParams,setSearchParams] = useSearchParams();
+    const query = searchParams.get("serial_number");
+    const query2 = searchParams.get("assessment_id");
+    const navigate = useNavigate();
 
     function handleOpen(){
         setOpenPopup(true)
@@ -20,6 +24,10 @@ function ReadyT(){
     function handleClose(){
         setOpenPopup(false)
     } 
+    const handleClick = () => {
+        const sid = `?serial_number=${query}&assessment_id=${query2}`
+        navigate(`/Balloons${sid}`)
+    }
 
     return (
         <div className="Ready1">
@@ -56,7 +64,7 @@ function ReadyT(){
             />  
 
             <div className='button-justifyer'>
-                <Link to="/Balloons" className="btnt"> ابدأ</Link>
+                <div onClick={() => handleClick()} className="btnt"> ابدأ</div>
                 <button className="btnt2" onClick={handleOpen}>فيديو توضيحى</button>
             </div>
 
