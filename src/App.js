@@ -17,10 +17,17 @@ import Ready from './components/Assessments/VSGame/Ready/Ready';
 import Main from './components/Main';
 import Ultimatum from './components/Assessments/Ultimatum/Ultimatum';
 import Layout from './components/Assessments/Layout/Layout';
+import Done from './components/Assessments/Done';
+import { Helmet } from 'react-helmet';
 
 function App() {
   return (
     <div className="App">
+      <Helmet>
+                <meta charSet="utf-8" />
+                <title>Cells</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
       <Router>
         <Routes>
           <Route path='/' element={<Main />}> </Route>
@@ -45,6 +52,8 @@ function App() {
 
           {/*2. decision making - lowa gambling */}
           <Route exact path="/Layout" element={<Layout />} />
+
+          <Route exact path="/Done" element={<Done />} />
         </Routes>
       </Router>
     </div>

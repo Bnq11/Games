@@ -5,13 +5,12 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-
+import {useNavigate} from "react-router-dom"
 import { Container } from 'react-bootstrap';
 import { TbClick } from 'react-icons/tb';
 import Fade from 'react-reveal';
 import { ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2';
-import Done from './../Done';
 
 import moneybagImage from './moneybag.png';
 
@@ -28,7 +27,10 @@ function Ultimatum() {
   // console.log(count);
   // console.log(scenarios);
   // console.log(totalAmount);
-
+  const navigate = useNavigate();
+  const [report, setReport] = useState('');
+  const [info, setInfo] = useState('');
+  
 
   function handleButtonClicksuccess(totalAmount) {
     Swal.fire({
@@ -58,9 +60,10 @@ function Ultimatum() {
     const proposerSplit = fairness / 10; // percentage of offer amount that the proposer will receive if the offer is accepted
     const proposerAmount = Math.floor(offerAmount * proposerSplit); // calculate proposer split amount
     const recipientAmount = offerAmount - proposerAmount; 
-
     const splitAmount = proposerAmount;
     const totalAmount = proposerAmount;
+    const Info='\n'+"المبلغ المعروض: "+ offerAmount +"\n المبلغ الحاصل عليه: "+proposerAmount+"\n المبلغ المعطى: "+ recipientAmount;
+   
     const description = (
         <div class="message-container">
           <Fade left>
@@ -87,7 +90,7 @@ function Ultimatum() {
         </div>
     );
 
-    return { offerAmount, splitAmount, description, totalAmount };
+    return { offerAmount, splitAmount, description, totalAmount, Info };
   }
 
   function generateScenarios(numScenarios) {
@@ -99,6 +102,7 @@ function Ultimatum() {
       const id = i + 1; // generate unique identifier
 
       newScenarios.push({ id, fairness, ...proposal }); // add scenario to array
+
     }
 
     setScenarios(newScenarios); // update state with new scenarios
@@ -123,12 +127,16 @@ function Ultimatum() {
       setCash((prevCash) => prevCash + scenarios[count]?.totalAmount);
       setTotalAmount()
       setAccept((prevAccept) => prevAccept + 1);
+      setReport(report+'\n المحاولة'+(count+1)+": تم قبولها"+scenarios[count]?.Info)
       console.log("accept",accept);
+      console.log(report)
       handleButtonClicksuccess(scenarios[count]?.totalAmount,)
       console.log(nextvalue)
     }else{
         setReject((prevReject) => prevReject + 1);
+        setReport(report+'\n المحاولة'+(count+1)+": تم رفضها"+scenarios[count]?.Info)
         console.log("reject",reject)
+        console.log(report)
         handleButtonClickfailure(scenarios[count]?.totalAmount)
         console.log(nextvalue)
     }
@@ -146,8 +154,7 @@ function Ultimatum() {
       width: "400px",
     }).then(() => {
       // Reload the page to restart the game
-      // window.location.reload();
-      <Done/>
+      navigate("/Done")
     });
   }
   // Check the count value after every update
@@ -172,6 +179,7 @@ useEffect(() => {
     return () => clearInterval(intervalId);
   }, []);
   function CalculateScore (){
+   var FinalReport = report;
    
   }
   return Start === false ? (
@@ -192,32 +200,32 @@ useEffect(() => {
         <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_NaBiczarjA.json"  background="transparent"  speed="1"  style={{ width: '300px', height: '250px' }}  loop  autoplay></lottie-player>
         <div className="alert-message">
           {/* TODO: اكتب وصف */}
-          <div class="card cardfix">
+          <div class="cardu cardfix">
           <Fade right>
-            <h1 className="description">
+            <h3 className="description">
               في هذه اللعبة، عدد من العروض ستقدم لك. خلال كل عرض، سيتلقى شخص آخر
               نسبة من المبلغ{" "}
-            </h1>
+            </h3>
           </Fade>
           </div>
 
-          <div class="card cardfix">
+          <div class="cardu cardfix">
           <Fade right>
-              <h1 className="description">
+              <h3 className="description">
                نسبة المبلغ المعروض تختلف من كل عرض لاخر
-              </h1>
+              </h3>
           </Fade>
           </div>
-          <div class="card cardfix">
+          <div class="cardu cardfix">
           <Fade right>
-            <h1 className="description">
+            <h3 className="description">
               يمكنك اختيار
               <span className="positive"> قبول </span>
               أو <span className="negative"> رفض </span> العرض
-            </h1>
+            </h3>
           </Fade>
           </div>
-          <div class="card cardfix">
+          <div class="cardu cardfix">
           <Fade right>
               <h1 className="description">
                 عند
@@ -227,7 +235,7 @@ useEffect(() => {
               </h1>
           </Fade>
           </div>
-          <div class="card cardfix">
+          <div class="cardu cardfix">
           <Fade right>
             <h1 className="description">
               عليك اختيار العروض الاكثر عدلًا مع الابقاء في عين الاعتبار أن هدفك
@@ -235,7 +243,7 @@ useEffect(() => {
             </h1>
           </Fade>
           </div>
-          <div class="card cardfix">
+          <div class="cardu cardfix">
           <Fade right>
             <h1 className="description-start">
               للبدأ اضغط ابدأ اللعب
@@ -248,9 +256,9 @@ useEffect(() => {
       </div>
       {/* fourth section */}
       <div className="card-deck">
-        <div className="card1 startbutton" onClick={() => handleStartClick()}>
+        <div className="cardu startbutton" onClick={() => handleStartClick()}>
           <Fade right>
-            <h1 className="margin0">ابدأ اللعب</h1>
+            <h3 className="margin0">ابدأ اللعب</h3>
           </Fade>
         </div>
       </div>
@@ -282,13 +290,13 @@ useEffect(() => {
         <div className="amount">
           <div className="icon-cash">
           <div className="cash"  style={{ backgroundColor: colors[colorIndex], transition: "background-color 1s ease-in-out" }}>
-            <h1 className="cash-name">مجموع الربح الان</h1>
-            <h1 className="cash-name">:</h1>
-            <h1 className="cash-amount">
+            <h3 className="cash-name">مجموع الربح الان</h3>
+            <h3 className="cash-name">:</h3>
+            <h3 className="cash-amount">
               {" "}
               {cash}{" "}
-            </h1>
-            <h1 className="cash-name"> ريال </h1>
+            </h3>
+            <h3 className="cash-name"> ريال </h3>
             <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_it8yjgkh.json"  background="transparent"  speed="1"  style={{ width: '100px', height: '80px' }}  loop  autoplay></lottie-player>
             {/* <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_pk0smbuq.json"  background="transparent"  speed="1"  style={{ width: '100px', height: '80px' }}  loop  autoplay></lottie-player> */}
             </div>
@@ -302,13 +310,13 @@ useEffect(() => {
         <Fade left key={count}>
           {/* <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_L5FmEqdLn6.json"  background="transparent"  speed="0.7"  style={{ width: '150px', height: '150px', margin:'auto' }}  loop autoplay></lottie-player> */}
           <lottie-player key={count} src="https://assets10.lottiefiles.com/packages/lf20_j3yti031.json"  background="transparent"  speed="0.3"  style={{ width: '170px', height: '170px', margin:'auto' }}     autoplay></lottie-player>
-          <h1 className="marginbottom">رفض</h1>
+          <h3 className="marginbottom">رفض</h3>
         </Fade>
       </div>
         <div className="alert-body">
             <Fade up key={count}>
               <div className="alert-message">
-                <h1 className="scenario">{getScenario()}</h1>
+                <h3 className="scenario">{getScenario()}</h3>
               </div>
             </Fade>
         </div>
@@ -316,7 +324,7 @@ useEffect(() => {
           <Fade right key={count}>
             {/* <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_Vs49OV.json"  background="transparent"  speed="0.7"  style={{ width: '150px', height: '150px',margin:'auto' }}  loop  autoplay></lottie-player> */}
             <lottie-player key={count} src="https://assets6.lottiefiles.com/packages/lf20_kenw4cok.json"  background="transparent"  speed="0.3"   style={{ width: '150px', height: '150px',margin:'auto' }} autoplay></lottie-player>
-            <h1 className="marginbottom">قبول</h1>
+            <h3 className="marginbottom">قبول</h3>
           </Fade>
         </div>
       </div>
