@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 import Background from '../../../Background/Background';
 import Videopopup from '../../../Videopopup';
-import demo from '../assets/BRAT.mp4';
+import demo from './BART.MP4';
 import { useSearchParams,useNavigate } from 'react-router-dom';
 
 function ReadyT(){
@@ -100,7 +100,7 @@ const handleClick = () => {
             {/* <button className='btntrvs m-0' onClick={()=>{setCard2(true);setCard1(false)}}>  {'< '} التالي</button> */}
             <div className='button-justifyer'>
             <div onClick={() => handleClick()} className="btnt"> ابدأ</div>
-            <button className="btnt2" onClick={handleOpen}>فيديو توضيحى</button>
+            <button className="btnt2" onClick={handleOpen}> مشاهدة تجربة</button>
             <button className='btntrvs m-0' onClick={()=>{setCard2(false);
            setCard1(() => true);}}>
                السابق  {'>'}</button>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Background from '../../Background/Background';
 import Videopopup from '../../Videopopup';
-import demo from '../BART/assets/BRAT.mp4';
+import demo from './Layout.mp4';
 
 function ReadyLayout() {
    const [openPopup, setOpenPopup] = useState(false);
@@ -64,7 +64,7 @@ function ReadyLayout() {
             <Link to="/Layout" className="btnt">ابدأ</Link>
         
             {/* <div onClick={() => handleClick()} className="btnt"> ابدأ</div> */}
-            <button className="btnt2" onClick={handleOpen}>فيديو توضيحى</button>
+            <button className="btnt2" onClick={handleOpen}> مشاهدة تجربة </button>
             <button className='btntrvs m-0' onClick={()=>{setCard1(false);
            setcardin(() => true);}}>
                السابق  {'>'}</button>

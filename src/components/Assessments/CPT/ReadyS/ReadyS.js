@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import Background from '../../../Background/Background';
 import Videopopup from '../../../Videopopup';
-import demo from '../../BART/assets/BRAT.mp4';
+import demo from './CPT.mp4';
 
 function ReadyS(){
     const [openPopup, setOpenPopup] = useState(false);
@@ -64,8 +64,8 @@ X  بالإضافة على علامة </h3>
     </h3>
     {/* <button className='btntrvs m-0' onClick={()=>{setCard2(true);setCard1(false)}}>  {'< '} التالي</button> */}
     <div className='button-justifyer'>
-    <Link to="/Letters" className="btn">ابدأ</Link>
-    <button className="btnt2" onClick={handleOpen}>فيديو توضيحى</button>
+    <Link to="/Letters" className="btnt">ابدأ</Link>
+    <button className="btnt2" onClick={handleOpen}>مشاهدة تجربة</button>
     <button className='btntrvs m-0' onClick={()=>{setCard1(false);
    setcardin(() => true);}}>
        السابق  {'>'}</button>

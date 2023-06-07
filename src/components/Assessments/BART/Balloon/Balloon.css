@@ -16,7 +16,7 @@
 
 .tbuttonColorCyan:hover{
   color: #f3f6f9;
-  /* background-color: #F5CECE; */
+  background-color: #1abc9cab;
 } 
 
 .tbuttonColorBlue{
@@ -25,13 +25,14 @@
 }
 
 .tbuttonColorCyan{
-  background-color: #F5CECE;
-  color: #9F3D3D;
+  background-color: #b8f7eaab;
+  color: #1abc9cc4;
+  border: 3px solid #1abc9cab;
 }
 
 .tbuttonColorBlue:hover{
   color: #f3f6f9;
-  /* background-color:  #1abc9cab; */
+  background-color:  #9F3D3D;
 } 
 
 .Score1{

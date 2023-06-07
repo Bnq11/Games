@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 
 import Background from '../../Background/Background';
 import Videopopup from '../../Videopopup';
-import demo from '../BART/assets/BRAT.mp4';
+import demo from './ult.mp4';
 import moneybagImage from './moneybag.png';
 import Done from './../Done';
 import {useNavigate} from "react-router-dom"
@@ -242,7 +242,7 @@ useEffect(() => {
         {/* <Link to="/Ultimatum" className="btnt">ابدأ</Link> */}
     
         <div onClick={() => handleStartClick()} className="btnt"> ابدأ</div>
-        <button className="btnt2" onClick={handleOpen}>فيديو توضيحى</button>
+        <button className="btnt2" onClick={handleOpen}>مشاهدة تجربة </button>
         <button className='btntrvs m-0' onClick={()=>{setCard1(false);
        setcardin(() => true);}}>
            السابق  {'>'}</button>
