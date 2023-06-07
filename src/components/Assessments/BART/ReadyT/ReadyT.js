@@ -4,12 +4,12 @@ import './ReadyT.css';
 import React, { useState } from 'react';
 
 // import { DefaultPlayer as Video } from 'react-html5video/dist';
-import { Link } from 'react-router-dom';
+import { useSearchParams,useNavigate } from 'react-router-dom';
 
 import Background from '../../../Background/Background';
 import Videopopup from '../../../Videopopup';
 import demo from './BART.MP4';
-import { useSearchParams,useNavigate } from 'react-router-dom';
+
 
 function ReadyT(){
     const [openPopup, setOpenPopup] = useState(false);
@@ -118,8 +118,13 @@ const handleClick = () => {
                 </video>}
                 openPopup={openPopup}
                 handleClose={handleClose}
-            /> 
-          
+            />  
+
+            <div className='button-justifyer'>
+                <div onClick={() => handleClick()} className="btnt"> ابدأ</div>
+                <button className="btnt2" onClick={handleOpen}>فيديو توضيحى</button>
+            </div>
+
    
              {/* <Background height="100%"/> */}
             <ul className="circlesRisk" style={{ height:"100%" }}>

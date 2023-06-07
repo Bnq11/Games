@@ -3,7 +3,12 @@ import './Balloon.css';
 import 'react-toastify/dist/ReactToastify.css';
 import {useSearchParams} from 'react-router-dom';
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { addScore } from '../../../../API';
+=======
+import {useSearchParams} from 'react-router-dom';
+
+>>>>>>> reef
 import {
   toast,
   ToastContainer,
@@ -13,7 +18,11 @@ import Swal from 'sweetalert2';
 import moneybagImage from '../../Ultimatum/moneybag.png';
 import Popup from '../../VSGame/Popup/Popup';
 import Pop from '../assets/Pop.mp3';
+<<<<<<< HEAD
 import {useNavigate} from "react-router-dom"
+=======
+import { addScore } from '../../../../API';
+>>>>>>> reef
 
 function Balloons(){
     const [items] = useState([
@@ -62,6 +71,13 @@ function Balloons(){
     const [attempts, setAttempts] = useState (0);
     const [Risk, setRisk]=useState(0) 
     const [RiskRatio, setRiskRatio]=useState(0)
+<<<<<<< HEAD
+=======
+    const [loss, setLoss]=useState(0)
+    const [searchParams,setSearchParams] = useSearchParams();
+    const query = searchParams.get("serial_number");
+    const query2 = searchParams.get("assessment_id");
+>>>>>>> reef
     // Risk Taking Ratio will be used in the last step
     const [LastBalloon, setLastBalloon]=useState(0)
     const navigate = useNavigate();
