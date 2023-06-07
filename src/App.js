@@ -27,7 +27,7 @@ function App() {
     <div className="App">
      <Helmet>
                 <meta charSet="utf-8" />
-                <title>Cells</title>
+                <title>GamifiedAssessment</title>
                 <link rel="canonical" href="http://mysite.com/example" />
             </Helmet>
       <Router>

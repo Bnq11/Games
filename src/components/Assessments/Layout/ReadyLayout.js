@@ -11,6 +11,7 @@ function ReadyLayout() {
     const [card1,setCard1] = useState(false)
     const [card2,setCard2] = useState(false)
     const [card3,setCard3] = useState(false)
+    const[cardin , setcardin]= useState(true);
     function handleOpen(){
         setOpenPopup(true)
     }
@@ -20,31 +21,57 @@ function ReadyLayout() {
     } 
 
     return (
-    <div className="Ready">
-        <h1 className='title'> مهمة </h1>
-        <div className="tips">
-                <div className='headersandbutton my-1'>
-                <h3 className='tips-header'> 
-            . ستبدأ كل جولة لعبة جديدة برصيد 0 من النقاط وتظهر جميع البطاقات الـ 32 بعلامة الاستفهام 
-                </h3>
-                <button className='btnt m-0' onClick={()=>setCard1(true)}>التالي</button>
-                </div>
-                {card1 &&
-                <div className='headersandbutton my-1' >
-                <h3 className='tips-header'> 
-            . يمكنك قلب البطاقات بطاقة تلو الأخرى سواء كانت البطاقة التي تم قلبها  بطاقة - ذات وجه مبتسم - أو بطاقة خسارة
-                </h3>
-                <button className='btnt m-0' onClick={()=>setCard2(true)}>التالي</button>
-                </div>
-                }
-                {card2 &&
-                <div className='headersandbutton my-1'>
-                <h3 className='tips-header'> 
-            . تستمر الجولة وتزداد النقاط حتى تقوم بالتوقف من خلال النقر على زر "جمع" أو حتى تظهر بطاقة الخسارة ما يؤدي إلى خسارة كبيرة للنقاط 
-                </h3>
-                <button className='btnt m-0' onClick={()=>setCard3(true)}>التالي</button>
-                </div>
-                }
+        <div className="" style={{height:'100vh'}}>
+
+        <h1 className='title'>  </h1> 
+        
+        <div className="" style={{height:'80%',display:"flex"}}>
+        {cardin &&    <div style={{height:"fit-content"}} className='headersandbutton my-auto'>
+            <h3 className='tips-header'> 
+            <br/><br/>
+            !في هذه اللعبة، مهمتك بسيطة
+        <br/>
+        خلال هذه اللعبة سيعرض عليك عرض لكسب مال
+        <br/>
+        مبلغ المال سيكون مقسومًا لك ولطرف اخر اسمه محمد
+        <br/>
+        </h3>
+        <div className="containerinf">
+           
+            
+         </div>
+         <div className='space w-100'>
+            <button className='btntrvs m-0' onClick={()=>{setCard1(true);
+           setcardin(() => false);}}>
+                {'< '} التالي</button>
+            {/* <button className='btntrvs m-0' onClick={()=>{setCard1(true);
+           setcardin(() => false);}}>
+                {'> '} السابق</button> */}
+        </div>
+            </div>}
+          
+            {card1 &&
+            <div style={{height:"fit-content"}} className='headersandbutton my-auto'>
+            <h3 className='tips-header'> 
+            <br/>  <br/>  
+            اذا كنت تعتقد عن القسمة صحيحة وعادلة اضغط قبول، اذا كنت تعتقد انها غير عادلة اضغط رفض
+             <br/>   
+        
+             <br/>  <br/>  <br/>  
+            </h3>
+            {/* <button className='btntrvs m-0' onClick={()=>{setCard2(true);setCard1(false)}}>  {'< '} التالي</button> */}
+            <div className='button-justifyer'>
+            <Link to="/Layout" className="btnt">ابدأ</Link>
+        
+            {/* <div onClick={() => handleClick()} className="btnt"> ابدأ</div> */}
+            <button className="btnt2" onClick={handleOpen}>فيديو توضيحى</button>
+            <button className='btntrvs m-0' onClick={()=>{setCard1(false);
+           setcardin(() => true);}}>
+               السابق  {'>'}</button>
+        </div>
+            </div>
+            }
+          
         </div>
                 <Videopopup
                 title={"انتهى التقييم" }
@@ -55,11 +82,7 @@ function ReadyLayout() {
                 openPopup={openPopup}
                 handleClose={handleClose}
             />  
-            { card3 &&
-            <div className="button-justifyer"> 
-            <Link to="/Layout" className="btnt">ابدأ</Link>
-            <button className="btnt2" onClick={handleOpen}>فيديو توضيحى</button>
-        </div>}
+         
         <Background/>
     </div>
   )

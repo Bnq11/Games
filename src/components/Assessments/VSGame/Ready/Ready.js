@@ -32,15 +32,17 @@ function Ready(){
         
         <div className="" style={{height:'100vh'}}>
 
-            <h1 className='title'> مهمة  فرز البطاقات </h1> 
+            <h1 className='title'>  </h1> 
 
             <div className="" style={{height:'80%',display:"flex"}}>
             {cardin &&    <div style={{height:"fit-content"}} className='headersandbutton my-auto'>
                 <h3 className='tips-header'> 
-                في هذه اللعبة، مهمتك بسيطة!
+                !في هذه اللعبة، مهمتك بسيطة
+<br/>
+خلال هذه اللعبة سنعرض عليك بطاقة وعليك تصنيفها 
 
-خلال هذه اللعبة سنعرض عليك بطاقة وعليك تصنيفها الى أحد مجموعات البطاقات المعروضة.
- </h3>
+<br/>
+:الى أحد مجموعات البطاقات المعروضة </h3>
  <div className="containerinf">
                 { cards.map((card, index) => (
                     <Card key={index} item={card} id={index}/>
@@ -52,22 +54,26 @@ function Ready(){
                 <button className='btntrvs m-0' onClick={()=>{setCard1(true);
                setcardin(() => false);}}>
                     {'< '} التالي</button>
-                <button className='btntrvs m-0' onClick={()=>{setCard1(true);
+                {/* <button className='btntrvs m-0' onClick={()=>{setCard1(true);
                setcardin(() => false);}}>
-                    {'> '} السابق</button>
+                    {'> '} السابق</button> */}
             </div>
                 </div>}
                 {card1 &&
                 <div style={{height:"fit-content"}} className='headersandbutton my-auto'>
                 <h3 className='tips-header'> 
-                  
+                <br/>  <br/>  
 اذا فرزت البطاقة بشكل صحيح، سيظهر كلمة "صحيح". اذا فرزتها بشكل خاطئ سيظهر "خاطئ"
-عليك الحصور على أكبر عدد ممكن من الفرز الصحيح
+عليك الحصول على أكبر عدد ممكن من الفرز الصحيح
+                <br/>  <br/>   <br/>  
                 </h3>
                 {/* <button className='btntrvs m-0' onClick={()=>{setCard2(true);setCard1(false)}}>  {'< '} التالي</button> */}
                 <div className='button-justifyer'>
                 <Link to="/Cards" className="btn">ابدأ</Link>
                 <button className="btnt2" onClick={handleOpen}>فيديو توضيحى</button>
+                <button className='btntrvs m-0' onClick={()=>{setCard1(false);
+               setcardin(() => true);}}>
+                   السابق  {'>'}</button>
             </div>
                 </div>
                 }

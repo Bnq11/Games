@@ -20,6 +20,8 @@ function ReadyT(){
     const query = searchParams.get("serial_number");
     const query2 = searchParams.get("assessment_id");
     const navigate = useNavigate();
+    const[cardin , setcardin]= useState(true);
+
 
     function handleOpen(){
         setOpenPopup(true)
@@ -33,41 +35,81 @@ const handleClick = () => {
         navigate(`/Balloons${sid}`)
     }
     return (
-        <div className="Ready1">
+        <div className="" style={{height:'100vh'}}>
 
-            <h1 className='title'> مهمة  </h1> 
+        <h1 className='title'>  </h1> 
+        
+        <div className="" style={{height:'80%',display:"flex"}}>
+        {cardin &&    <div style={{height:"fit-content"}} className='headersandbutton my-auto'>
+            <h3 className='tips-header'> 
+            <br/><br/>
+            !في هذه اللعبة، مهمتك بسيطة
+        <br/>
+        "خلال اللعبة سيعرض عليك بالون، وبإمكانك الضغط على زر "زيادة الحجم
+        <br/>
+          . لزيادة حجم البالون
+        <br/>
+    </h3>
+        <div className="containerinf">
+           
+            
+         </div>
+         <div className='space w-100'>
+            <button className='btntrvs m-0' onClick={()=>{setCard1(true);
+           setcardin(() => false);}}>
+                {'< '} التالي</button>
+            {/* <button className='btntrvs m-0' onClick={()=>{setCard1(true);
+           setcardin(() => false);}}>
+                {'> '} السابق</button> */}
+        </div>
+            </div>}
+           {card1&& <div style={{height:"fit-content"}} className='headersandbutton my-auto'>
+           <h3 className='tips-header'> 
+            <br/>  <br/>  
+            
+            عند كل ضغطة على زر "زيادة الحجم"، ستحصل على ٥ ريالات
+             <br/> 
+             لكل بالون حد معين من الزيادة، يجب عليك التوقف قبل أن ينفجر البالون
+             <br/>   
+             .إذا انفجر البالون، ستخسر كل المال الذي جمعته
+             <br/>  <br/>  
+            </h3>
+        <div className="containerinf">
+           
+            
+         </div>
+         <div className='space w-100'>
+            <button className='btntrvs m-0' onClick={()=>{setCard2(true);
+           setCard1(() => false);}}>
+                {'< '} التالي</button>
+            <button className='btntrvs m-0' onClick={()=>{setcardin(true);
+           setCard1(() => false);}}>
+                السابق{' > '} </button>
+        </div>
+            </div>}
+            {card2 &&
+            <div style={{height:"fit-content"}} className='headersandbutton my-auto'>
+            <h3 className='tips-header'> 
+            <br/>  <br/>  
+            
+            .للتوقف وجمع المال، اضغط على "جمع". سيضاف مبلغ الجولة الى المبلغ الكلي
+             <br/>   
 
-            <div className="tips">
-                <div className='headersandbutton my-1'>
-                <h3 className='tips-header'> 
-                .سيُقدم لك ١٥ بالونًا ، واحدًا تلو الآخر.
-                يمكنك النقر فوق الزر المسمى "زيادة" لزيادة حجم البالون
-                </h3>
-                <button className='btnt m-0' onClick={()=>setCard1(true)}>التالي</button>
-                </div>
-                {card1 &&
-                <div className='headersandbutton my-1' >
-                <h3 className='tips-header'> 
-                .ستجمع 5 هللات في بنك مؤقت لكل زيادة. سيظهر لك المبلغ المتراكم في مصرفك المؤقت
-                
-                في أي وقت ، يمكنك التوقف عن ضخ البالون والنقر على الزر المسمى "جمع". 
-                سيؤدي النقر فوق هذا الزر إلى بدء تشغيل البالون التالي
-                </h3>
-                <button className='btnt m-0' onClick={()=>setCard2(true)}>التالي</button>
-                </div>
-                }
-                {card2 &&
-                <div className='headersandbutton my-1'>
-                <h3 className='tips-header'> 
-                ." وتحويل الأموال المتراكمة من مصرفك المؤقت إلى مصرفك الدائم المسمى "إجمالي الأرباح
-                .ولكن كن على دراية بأن البالون سينفجر في مرحلة ما، تختلف نقطة الانفجار عبر البالونات
-                .إذا انفجر البالون قبل النقر فوق "جمع" ، فإنك تنتقل إلى البالون التالي وتفقد جميع الأموال الموجودة فيه
-                </h3>
-                <button className='btnt m-0' onClick={()=>setCard3(true)}>التالي</button>
-                </div>
-                }
+             <br/>  <br/>  <br/>  
+            </h3>
+            {/* <button className='btntrvs m-0' onClick={()=>{setCard2(true);setCard1(false)}}>  {'< '} التالي</button> */}
+            <div className='button-justifyer'>
+            <div onClick={() => handleClick()} className="btnt"> ابدأ</div>
+            <button className="btnt2" onClick={handleOpen}>فيديو توضيحى</button>
+            <button className='btntrvs m-0' onClick={()=>{setCard2(false);
+           setCard1(() => true);}}>
+               السابق  {'>'}</button>
+        </div>
             </div>
-
+            }
+          
+        </div>
+        
             <Videopopup
                 title={"انتهى التقييم" }
                 children= {
@@ -76,16 +118,10 @@ const handleClick = () => {
                 </video>}
                 openPopup={openPopup}
                 handleClose={handleClose}
-            />  
-            { card3 &&
-            <div className='button-justifyer'>
-                {/* <Link to="/Balloons" className="btnt"> ابدأ</Link> */}
-                <div onClick={() => handleClick()} className="btnt"> ابدأ</div>
-                <button className="btnt2" onClick={handleOpen}>فيديو توضيحى</button>
-            </div>
-            }
+            /> 
+          
    
-            {/* <Background height="100%"/> */}
+             {/* <Background height="100%"/> */}
             <ul className="circlesRisk" style={{ height:"100%" }}>
         <li></li>
         <li></li>
