@@ -51,15 +51,15 @@ export default function Timer({
     <TimerWrapper>
       <BsStopwatch className="stop-watch " />
       <div className="d-flex flex-column">
-        <label>mm</label>
+        <label>دقيقة</label>
         <input value={minutes} onChange={changeMinutes} />
       </div>{" "}
       <div className="d-flex flex-column">
-        <label>ss</label>
+        <label>ثانية</label>
         <input value={seconds} onChange={changeSeconds} />
       </div>{" "}
       <div className="d-flex flex-column">
-        <label>ms</label>
+        <label>جزء من الثانية</label>
         <input value={milliseconds} />
       </div>
     </TimerWrapper>
